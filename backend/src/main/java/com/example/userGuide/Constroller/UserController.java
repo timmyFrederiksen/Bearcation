@@ -26,11 +26,18 @@ public class UserController {
         return userService.userById(id);
     }
 
+    @PostMapping("users")
+    public User createEmployee(@RequestBody User employee) {
+        return userService.createUser(employee);
+    }
+    /*
     @PostMapping("post")
     @ResponseStatus(HttpStatus.CREATED)
     public User createUser(@RequestBody User user) {
         return userService.createUser(user);
     }
+
+     */
 }
 
 
