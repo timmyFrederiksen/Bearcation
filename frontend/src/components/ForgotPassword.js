@@ -1,14 +1,12 @@
 import React from 'react';
 import UserService from '../services/UserService';
-import ForgotPassword from './ForgotPassword';
-
 import axios from 'axios';
 
-class UserComponent extends React.Component {
+class ForgotPassword extends React.Component {
     accounts = [];
     constructor(props) {
         super(props);
-        this.state = {username: '', password: ''};
+        this.state = {username: '', password: '', confirmPassword: ''};
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleChangeStatus = this.handleChangeStatus.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -44,13 +42,13 @@ class UserComponent extends React.Component {
 
         axios.post("http://localhost:80/user/users", userDto)
             .then(res => {
-                console.log('Account added successfully!');
+                console.log('Password changed successfully!');
                 console.log(res);
                 this.setState( {
                     username: res.data.username,
                     password: res.data.password
                 });
-                alert("Welcome " + this.state.username + " " + this.state.password);
+                alert("The password for " + this.state.username + " has changed.");
             })
 
         event.preventDefault();
@@ -61,8 +59,7 @@ class UserComponent extends React.Component {
     render() {
         return (
             <div>
-                <h1>Create Account</h1>
-
+                <h1>Forgot Password</h1>
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
                         <label>
@@ -71,47 +68,22 @@ class UserComponent extends React.Component {
                         <input name = "username" className="form-control" value={this.state.username} type="text" onChange={this.handleInputChange} />
 
                     </div>
-
                     <div>
                         <label>
-                            Password:
+                            New Password:
                         </label>
                         <input name = "password"  value={this.state.password} type="text" onChange={this.handleInputChange} />
-
+                    </div>
+                    <div>
+                        <label>
+                            Confirm New Password:
+                        </label>
+                        <input name = "confirmPassword"  value={this.state.confirmPassword} type="text" onChange={this.handleInputChange} />
                     </div>
                     <input type="submit" value="Submit" />
                 </form>
-                <div className={"forgotPassword"}>
-                    <p><ForgotPassword/></p>
-                </div>
                 <br />
                 <label>{this.state.message}</label>
-
-                <h1 className = "text-center"> Users List</h1>
-                <table className = "table table-striped">
-                    <thead>
-                    <tr>
-                        <td> User Id</td>
-                        <td> User Username</td>
-                        <td> User Password</td>
-                    </tr>
-
-                    </thead>
-                    <tbody>
-                    {
-                        this.accounts.map(
-                            user =>
-                                <tr key = {user.id}>
-                                    <td> {user.id}</td>
-                                    <td> {user.username}</td>
-                                    <td> {user.password}</td>
-                                </tr>
-                        )
-                    }
-                    </tbody>
-                </table>
-
-
             </div>
         );
     }
@@ -119,4 +91,4 @@ class UserComponent extends React.Component {
 
 }
 
-export default UserComponent
+export default ForgotPassword
