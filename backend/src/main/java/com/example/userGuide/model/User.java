@@ -2,9 +2,14 @@ package com.example.userGuide.model;
 
 import javax.persistence.*;
 
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 @Entity
 @Table(name = "users")
 public class User {
+    PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -21,7 +26,7 @@ public class User {
 
     public User(String password, String username) {
         super();
-        this.password = password;
+        this.password = passwordEncoder.encode(password);
         this.username = username;
     }
     public long getId() {
@@ -34,7 +39,7 @@ public class User {
         return password;
     }
     public void setPassword(String password) {
-        this.password = password;
+        this.password = passwordEncoder.encode(password);
     }
     public String getUsername() {
         return username;
