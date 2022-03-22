@@ -1,8 +1,10 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import {Route, BrowserRouter, Routes, NavLink, Link} from "react-router-dom";
 import UserService from '../services/UserService';
-import ForgotPassword from './ForgotPassword';
 
 import axios from 'axios';
+import ForgotPassword from "./ForgotPassword";
 
 class UserComponent extends React.Component {
     accounts = [];
@@ -82,7 +84,9 @@ class UserComponent extends React.Component {
                     <input type="submit" value="Submit" />
                 </form>
                 <div className={"forgotPassword"}>
-                    <p><ForgotPassword/></p>
+                        <nav>
+                            <Link to="/ForgotPassword">Forgot Password?</Link>
+                        </nav>
                 </div>
                 <br />
                 <label>{this.state.message}</label>
@@ -110,13 +114,9 @@ class UserComponent extends React.Component {
                     }
                     </tbody>
                 </table>
-
-
             </div>
         );
     }
-
-
 }
 
-export default UserComponent
+export default UserComponent;
