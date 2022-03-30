@@ -1,7 +1,6 @@
 import React from 'react';
 import UserService from '../services/UserService';
 import axios from 'axios';
-import {Link} from "react-router-dom";
 
 class ForgotPassword extends React.Component {
     accounts = [];
@@ -51,16 +50,18 @@ class ForgotPassword extends React.Component {
                 });
                 alert("The password for " + this.state.username + " has changed.");
             })
-        event.preventDefault();
 
+        event.preventDefault();
     }
+
+
 
     render() {
         return (
             <div>
                 <h1>Forgot Password</h1>
                 <form onSubmit={this.handleSubmit}>
-                    <div className="reset-form-group">
+                    <div className="form-group">
                         <label>
                             Username:
                         </label>
@@ -90,4 +91,4 @@ class ForgotPassword extends React.Component {
 
 }
 
-export default ForgotPassword;
+export default ForgotPassword
