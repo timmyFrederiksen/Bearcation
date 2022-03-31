@@ -2,13 +2,17 @@ import React from "react";
 import Park from "../models/Park";
 import NPSService from "../services/NPSService";
 
+const wacoLat = "31.559814";
+const wacoLon = "-97.141800";
+
 class NPSComponent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { parks: [], sortType: 0 };
+        this.state = { parks: [], scores: [], sortType: 0 };
         this.sortByFee = this.sortByFee.bind(this);
         this.sortByLocation = this.sortByLocation.bind(this);
         this.resetSort = this.resetSort.bind(this);
+        this.sort = this.sort.bind(this);
     }
 
     componentDidMount() {
@@ -21,7 +25,12 @@ class NPSComponent extends React.Component {
                         park.activities.length,
                         park.entranceFees[0].cost,
                         park.latitude,
-                        park.longitude
+                        park.longitude,
+                        this.calculateScore(
+                            this.calculateDistance(wacoLat, wacoLon, park.latitude, park.longitude),
+                            park.activities.length,
+                            park.entranceFees[0].cost
+                        )
                     )
                 )
             );
@@ -48,6 +57,29 @@ class NPSComponent extends React.Component {
         return (parseFloat(value) * Math.PI) / 180;
     }
 
+    calculateScore(distance, activityCount, cost) {
+        var score = 0;
+        if (distance <= 250) {
+            score += 50;
+        } else if (distance <= 750) {
+            score += 25;
+        } else if (distance <= 1500) {
+            score += 10;
+        }
+
+        score += activityCount < 25 ? activityCount * 2 : 50;
+
+        if (cost <= 1) {
+            score += 50;
+        } else if (cost <= 20) {
+            score += 25;
+        } else if (cost <= 50) {
+            score += 5;
+        }
+
+        return score;
+    }
+
     sortByFee() {
         this.setState({ sortType: 1 });
         this.sort();
@@ -65,6 +97,7 @@ class NPSComponent extends React.Component {
 
     sort() {
         var parkData = this.state.parks;
+        /*
         switch (this.state.sortType) {
             case 1:
                 parkData = [].concat(this.state.parks).sort((a, b) => a.price - b.price);
@@ -78,6 +111,9 @@ class NPSComponent extends React.Component {
                     .sort((a, b) => a.fullName.localeCompare(b.fullName));
                 break;
         }
+        */
+
+        parkData = [].concat(this.state.parks).sort((a, b) => a.score - b.score);
 
         this.setState({ parks: parkData });
     }
@@ -89,16 +125,15 @@ class NPSComponent extends React.Component {
                     <h1>National Park Service Data</h1>
                 </div>
                 <div>
-                    <button onClick={this.sortByFee}>Sort by Fee</button>
-                    <button onClick={this.sortByLocation}>Sort by Location</button>
-                    <button onClick={this.resetSort}>Sort Alphabetically</button>
+                    <button onClick={this.sort}>Sort</button>
                 </div>
                 {<div>{this.state.parks.length}</div>}
                 <div>{this.state.sortType}</div>
                 {this.state.parks?.map((park) => (
                     <div>
                         {park.fullName} | {park.activities} | {park.price} |
-                        {this.calculateDistance("31.559814", "-97.141800", park.lat, park.long)}
+                        {this.calculateDistance("31.559814", "-97.141800", park.lat, park.long)} |
+                        {park.score}
                     </div>
                 ))}
             </div>
