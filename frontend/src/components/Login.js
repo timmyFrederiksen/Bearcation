@@ -1,12 +1,11 @@
 import React from 'react';
+
 import ReactDOM from 'react-dom';
-import {Route, BrowserRouter, Routes, NavLink, Link} from "react-router-dom";
+import {Route, BrowserRouter, Routes, NavLink, Link, withRouter} from "react-router-dom";
 import UserService from '../services/UserService';
-
 import axios from 'axios';
-import ForgotPassword from "./ForgotPassword";
 
-class UserComponent extends React.Component {
+class Login extends React.Component {
     accounts = [];
     constructor(props) {
         super(props);
@@ -38,55 +37,61 @@ class UserComponent extends React.Component {
 
 
     handleSubmit(event) {
-
+        event.preventDefault();
         const userDto = {
-            password: this.state.password,
             username: this.state.username,
+            password: this.state.password,
         };
 
-        // axios.post("http://localhost:80/user/users", userDto)
-        //     .then(res => {
-        //         console.log('Account added successfully!');
-        //         console.log(res);
-        //         this.setState( {
-        //             username: res.data.username,
-        //             password: res.data.password
-        //         });
-        //         alert("Welcome " + this.state.username + " " + this.state.password);
-        //     })
 
-        event.preventDefault();
+        /*const response = await login(userDto.username, userDto.password);
+        if(response != null){
+            this.props.history.push({
+                pathname: '/home',
+                state: {user: userDto.username}
+            })
+        }else{
+            alert("Credentials do not match any account.")
+        }*/
+
+
     }
 
     render() {
         return (
-            <div>
+            <div className="loginBody">
                 <h1>Login</h1>
-                <form onSubmit={this.handleSubmit}>
-                    <div className="form-group">
+                <form className = "loginForm" onSubmit={this.handleSubmit}>
+                    <div className="usernameArea">
                         <label>
                             Username:
                         </label>
-                        <input name = "username" className="form-control" value={this.state.username} type="text" onChange={this.handleInputChange} />
+                        <input name = "username" className="usernameBox" value={this.state.username} type="text" onChange={this.handleInputChange} required />
                     </div>
-                    <div>
+                    <div className="passwordArea">
                         <label>
                             Password:
                         </label>
-                        <input name = "password"  value={this.state.password} type="text" onChange={this.handleInputChange} />
+                        <input name = "password" className="passwordBox" value={this.state.password} type="text" onChange={this.handleInputChange} required />
                     </div>
-                    <input type="submit" value="Submit" />
+                    <div className="submitArea">
+                        <input type="submit" value="Submit" />
+                    </div>
                 </form>
-                <div className={"CreateAccount"}>
+                <div className={"forgotPassword"}>
                     <nav>
-                        <Link to="/CreateAccount">Create Account</Link>
+                        <Link to="/forgot-password">Forgot Password?</Link>
+                    </nav>
+                </div>
+                <div className={"createAccount"}>
+                    <nav>
+                        <Link to="/signup">Create Account</Link>
                     </nav>
                 </div>
                 <br />
-                <label>{this.state.message}</label>
             </div>
         );
     }
 }
 
-export default UserComponent;
+export default Login;
