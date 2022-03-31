@@ -8,11 +8,27 @@ const wacoLon = "-97.141800";
 class NPSComponent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { parks: [], scores: [], sortType: 0 };
-        this.sortByFee = this.sortByFee.bind(this);
-        this.sortByLocation = this.sortByLocation.bind(this);
-        this.resetSort = this.resetSort.bind(this);
+        this.state = {parks: [], longitude: wacoLon, latitude: wacoLat, activities: '', fee: 1, scores: [], sortType: 0};
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleChangeStatus = this.handleChangeStatus.bind(this);
+        //this.handleSubmit = this.handleSubmit.bind(this);
+        //this.sortByFee = this.sortByFee.bind(this);
+        //this.sortByLocation = this.sortByLocation.bind(this);
+        //this.resetSort = this.resetSort.bind(this);
         this.sort = this.sort.bind(this);
+    }
+    handleChangeStatus(event) {
+        this.setState({level: event.target.value});
+    }
+
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
     }
 
     componentDidMount() {
@@ -23,14 +39,10 @@ class NPSComponent extends React.Component {
                     new Park(
                         park.fullName,
                         park.activities.length,
-                        park.entranceFees[0].cost,
+                        park.activities,
+                        (park.entranceFees.length > 0) ? park.entranceFees[0].cost : 0,
                         park.latitude,
                         park.longitude,
-                        this.calculateScore(
-                            this.calculateDistance(wacoLat, wacoLon, park.latitude, park.longitude),
-                            park.activities.length,
-                            park.entranceFees[0].cost
-                        )
                     )
                 )
             );
@@ -57,10 +69,12 @@ class NPSComponent extends React.Component {
         return (parseFloat(value) * Math.PI) / 180;
     }
 
-    // Score algorithm based off of a certain series of criteria
-    calculateScore(distance, activityCount, cost) {
-        var score = 0;
-        // Distance criteria, points out of 50 maximum
+    calculateScore(park) {
+        let distance = this.calculateDistance("31.559814", "-97.141800", park.lat, park.long);
+        let activityCount = park.numOfActivities;
+        let cost = park.price;
+
+        let score = 0;
         if (distance <= 250) {
             score += 50;
         } else if (distance <= 750) {
@@ -69,20 +83,52 @@ class NPSComponent extends React.Component {
             score += 10;
         }
 
-        // Number of activities, max of 50 points
         score += activityCount < 25 ? activityCount * 2 : 50;
 
-        // Cost of entrance, max of 50 points
-        if (cost <= 1) {
+        ;
+        if (cost <= this.state.fee) {
             score += 50;
-        } else if (cost <= 20) {
+        } else if (cost <= this.state.fee * 2) {
             score += 25;
-        } else if (cost <= 50) {
+        } else if (cost <= this.state.fee * 3) {
             score += 5;
+        }
+
+        for (let j = 0; j < park.activities.length; j++) {
+            let a = this.CSVtoArray(this.state.activities)
+            for (let k = 0; k < a.length; k++) {
+                if(a[k] === (park.activities[j].name)){
+                    score += 10;
+                }
+            }
         }
 
         return score;
     }
+
+    CSVtoArray(text) {
+        var re_valid = /^\s*(?:'[^'\\]*(?:\\[\S\s][^'\\]*)*'|"[^"\\]*(?:\\[\S\s][^"\\]*)*"|[^,'"\s\\]*(?:\s+[^,'"\s\\]+)*)\s*(?:,\s*(?:'[^'\\]*(?:\\[\S\s][^'\\]*)*'|"[^"\\]*(?:\\[\S\s][^"\\]*)*"|[^,'"\s\\]*(?:\s+[^,'"\s\\]+)*)\s*)*$/;
+        var re_value = /(?!\s*$)\s*(?:'([^'\\]*(?:\\[\S\s][^'\\]*)*)'|"([^"\\]*(?:\\[\S\s][^"\\]*)*)"|([^,'"\s\\]*(?:\s+[^,'"\s\\]+)*))\s*(?:,|$)/g;
+        // Return NULL if input string is not well formed CSV string.
+        if (!re_valid.test(text)) return null;
+        var a = [];                     // Initialize array to receive values.
+        text.replace(re_value, // "Walk" the string using replace with callback.
+            function(m0, m1, m2, m3) {
+                // Remove backslash from \' in single quoted values.
+                if      (m1 !== undefined) a.push(m1.replace(/\\'/g, "'"));
+                // Remove backslash from \" in double quoted values.
+                else if (m2 !== undefined) a.push(m2.replace(/\\"/g, '"'));
+                else if (m3 !== undefined) a.push(m3);
+                return ''; // Return empty string.
+            });
+        // Handle special case of empty last value.
+        if (/,\s*$/.test(text)) a.push('');
+        return a;
+    };
+    /*handleSubmit(event) {
+        event.preventDefault();
+        //this.setState({activities: []});
+    }*/
 
     sortByFee() {
         this.setState({ sortType: 1 });
@@ -100,7 +146,7 @@ class NPSComponent extends React.Component {
     }
 
     sort() {
-        var parkData = this.state.parks;
+        let parkData = this.state.parks;
         /*
         switch (this.state.sortType) {
             case 1:
@@ -117,14 +163,49 @@ class NPSComponent extends React.Component {
         }
         */
 
-        parkData = [].concat(this.state.parks).sort((a, b) => b.score - a.score);
-
+        parkData = [].concat(this.state.parks).sort((a, b) =>  this.calculateScore(b) - this.calculateScore(a));
         this.setState({ parks: parkData });
     }
 
     render() {
         return (
             <div>
+                <div>
+                    <h4>Search:</h4>
+
+                    <form onSubmit={this.handleSubmit}>
+                        <label>
+                            Activities:
+                        </label>
+                        <div>
+                            <input name = "activities" placeholder= "activities" value={this.state.activities} type="text" onChange={this.handleInputChange} />
+                        </div>
+                        <br></br>
+                        <div><b>Distance</b></div>
+                        <label>
+                            Longitude:
+                        </label>
+                        <div className="form-group">
+                            <input name = "longitude" className="form-control" placeholder= "Longitude" value={this.state.longitude} type="text" onChange={this.handleInputChange} required />
+                        </div>
+                        <label>
+                            Latitude:
+                        </label>
+                        <div>
+                            <input name = "latitude" placeholder= "Latitude" value={this.state.latitude} type="text" onChange={this.handleInputChange} required />
+                        </div>
+
+                        <br></br>
+                        <div><b>Value</b></div>
+                        <div>
+                            <input name = "fee" placeholder= "Fee" value={this.state.fee} type="text" onChange={this.handleInputChange} />
+                        </div>
+                        <div></div>
+                        {/*<input type="submit" value="Submit" />*/}
+                    </form>
+
+                    <label>{this.state.message}</label>
+                </div>
                 <div>
                     <h1>National Park Service Data</h1>
                 </div>
@@ -135,9 +216,9 @@ class NPSComponent extends React.Component {
                 <div>{this.state.sortType}</div>
                 {this.state.parks?.map((park) => (
                     <div>
-                        {park.fullName} | {park.activities} | {park.price} |
-                        {this.calculateDistance(wacoLat, wacoLon, park.lat, park.long)} |
-                        {park.score}
+                        {park.fullName} | {park.numOfActivities} | {park.price} |
+                        {this.calculateDistance(this.state.latitude, this.state.longitude, park.lat, park.long)} |
+                        {this.calculateScore(park)}
                     </div>
                 ))}
             </div>
