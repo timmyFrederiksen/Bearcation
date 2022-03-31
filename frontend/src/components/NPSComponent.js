@@ -8,7 +8,7 @@ const wacoLon = "-97.141800";
 class NPSComponent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {parks: [], longitude: wacoLon, latitude: wacoLat, activities: '', fee: 1, scores: [], sortType: 0};
+        this.state = {parks: [], longitude: wacoLon, latitude: wacoLat, activities: '', fee: 5, scores: [], sortType: 0};
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleChangeStatus = this.handleChangeStatus.bind(this);
         //this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,6 +29,8 @@ class NPSComponent extends React.Component {
         this.setState({
             [name]: value
         });
+
+        this.sort();
     }
 
     componentDidMount() {
@@ -70,12 +72,14 @@ class NPSComponent extends React.Component {
     }
 
     calculateScore(park) {
-        let distance = this.calculateDistance("31.559814", "-97.141800", park.lat, park.long);
+        let distance = this.calculateDistance(this.state.latitude, this.state.longitude, park.lat, park.long);
         let activityCount = park.numOfActivities;
         let cost = park.price;
 
         let score = 0;
-        if (distance <= 250) {
+        if(distance <= 50) {
+            score += 100;
+        }else if (distance <= 250) {
             score += 50;
         } else if (distance <= 750) {
             score += 25;
@@ -84,8 +88,7 @@ class NPSComponent extends React.Component {
         }
 
         score += activityCount < 25 ? activityCount * 2 : 50;
-
-        ;
+        
         if (cost <= this.state.fee) {
             score += 50;
         } else if (cost <= this.state.fee * 2) {
@@ -183,20 +186,21 @@ class NPSComponent extends React.Component {
                         <br></br>
                         <div><b>Distance</b></div>
                         <label>
-                            Longitude:
-                        </label>
-                        <div className="form-group">
-                            <input name = "longitude" className="form-control" placeholder= "Longitude" value={this.state.longitude} type="text" onChange={this.handleInputChange} required />
-                        </div>
-                        <label>
                             Latitude:
                         </label>
                         <div>
                             <input name = "latitude" placeholder= "Latitude" value={this.state.latitude} type="text" onChange={this.handleInputChange} required />
                         </div>
+                        <label>
+                            Longitude:
+                        </label>
+                        <div className="form-group">
+                            <input name = "longitude" className="form-control" placeholder= "Longitude" value={this.state.longitude} type="text" onChange={this.handleInputChange} required />
+                        </div>
+
 
                         <br></br>
-                        <div><b>Value</b></div>
+                        <div><b>Price (Fee)</b></div>
                         <div>
                             <input name = "fee" placeholder= "Fee" value={this.state.fee} type="text" onChange={this.handleInputChange} />
                         </div>
@@ -218,7 +222,7 @@ class NPSComponent extends React.Component {
                     <div>
                         {park.fullName} | {park.numOfActivities} | {park.price} |
                         {this.calculateDistance(this.state.latitude, this.state.longitude, park.lat, park.long)} |
-                        {this.calculateScore(park)}
+                        {<b>{this.calculateScore(park)}</b>}
                     </div>
                 ))}
             </div>
