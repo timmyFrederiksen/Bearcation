@@ -73,7 +73,6 @@ class UserComponent extends React.Component {
                         <input name = "username" className="form-control" value={this.state.username} type="text" onChange={this.handleInputChange} />
 
                     </div>
-
                     <div>
                         <label>
                             Password:
@@ -83,37 +82,37 @@ class UserComponent extends React.Component {
                     </div>
                     <input type="submit" value="Submit" />
                 </form>
-                <div className={"forgotPassword"}>
+                <div className={"login"}>
                         <nav>
-                            <Link to="/ForgotPassword">Forgot Password?</Link>
+                            <Link to="/">Already have an account?</Link>
                         </nav>
                 </div>
                 <br />
                 <label>{this.state.message}</label>
 
-                <h1 className = "text-center"> Users List</h1>
-                <table className = "table table-striped">
-                    <thead>
-                    <tr>
-                        <td> User Id</td>
-                        <td> User Username</td>
-                        <td> User Password</td>
-                    </tr>
+                {/*<h1 className = "text-center"> Users List</h1>*/}
+                {/*<table className = "table table-striped">*/}
+                {/*    <thead>*/}
+                {/*    <tr>*/}
+                {/*        <td> User Id</td>*/}
+                {/*        <td> User Username</td>*/}
+                {/*        <td> User Password</td>*/}
+                {/*    </tr>*/}
 
-                    </thead>
-                    <tbody>
-                    {
-                        this.accounts.map(
-                            user =>
-                                <tr key = {user.id}>
-                                    <td> {user.id}</td>
-                                    <td> {user.username}</td>
-                                    <td> {user.password}</td>
-                                </tr>
-                        )
-                    }
-                    </tbody>
-                </table>
+                {/*    </thead>*/}
+                {/*    <tbody>*/}
+                {/*    {*/}
+                {/*        this.accounts.map(*/}
+                {/*            user =>*/}
+                {/*                <tr key = {user.id}>*/}
+                {/*                    <td> {user.id}</td>*/}
+                {/*                    <td> {user.username}</td>*/}
+                {/*                    <td> {user.password}</td>*/}
+                {/*                </tr>*/}
+                {/*        )*/}
+                {/*    }*/}
+                {/*    </tbody>*/}
+                {/*</table>*/}
             </div>
         );
     }
