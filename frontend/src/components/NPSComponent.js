@@ -1,10 +1,6 @@
 import React from "react";
-
-import ReactDOM from "react-dom";
-import { Route, BrowserRouter, Routes, NavLink, Link } from "react-router-dom";
 import Park from "../models/Park";
 import NPSService from "../services/NPSService";
-import UserService from "../services/UserService";
 
 class NPSComponent extends React.Component {
     constructor(props) {
@@ -30,6 +26,24 @@ class NPSComponent extends React.Component {
         });
     }
 
+    calculateDistance(slat1, long1, slat2, long2) {
+        let R = 3950; // km
+        let dLat = this.toRad(parseFloat(slat2) - parseFloat(slat1));
+        let dLong = this.toRad(parseFloat(long2) - parseFloat(long1));
+        let lat1 = this.toRad(slat1);
+        let lat2 = this.toRad(slat2);
+
+        let a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.sin(dLong/2) * Math.sin(dLong/2) * Math.cos(lat1) * Math.cos(lat2);
+        let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return R * c;
+    }
+
+    // Converts numeric degrees to radians
+    toRad(value) {
+        return parseFloat(value) * Math.PI / 180;
+    }
+
     sortByFee() {
         this.setState({ sortType: 1 });
         this.sort();
@@ -46,7 +60,7 @@ class NPSComponent extends React.Component {
     }
 
     sort() {
-        var parkData;
+        let parkData;
         switch (this.state.sortType) {
             case 1:
                 parkData = [].concat(this.state.parks).sort((a, b) => a.price - b.price);
@@ -84,8 +98,8 @@ class NPSComponent extends React.Component {
                 {<div>{this.state.parks.length}</div>}
                 {this.state.parks?.map((park) => (
                     <div>
-                        {park.fullName} | {park.activities} | {park.price} | {park.lat} |{" "}
-                        {park.long}
+                        {park.fullName} | {park.activities} | {park.price} |
+                        {this.calculateDistance("31.559814", "-97.141800", park.lat, park.long)}
                     </div>
                 ))}
             </div>
