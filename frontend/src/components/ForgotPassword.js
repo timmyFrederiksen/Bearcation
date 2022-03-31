@@ -41,7 +41,7 @@ class ForgotPassword extends React.Component {
             username: this.state.username,
         };
 
-        axios.post("http://localhost:80/user/users", userDto)
+        axios.get("http://localhost:80/user/users", userDto)
             .then(res => {
                 console.log('Password changed successfully!');
                 console.log(res);
@@ -79,15 +79,13 @@ class ForgotPassword extends React.Component {
                         </label>
                         <input name = "confirmPassword"  value={this.state.confirmPassword} type="text" onChange={this.handleInputChange} />
                     </div>
-                    <input type="submit" value="Submit" />
+                    <input type="submit" value="Submit" type="button" onChange={this.handleSubmit}/>
                 </form>
                 <br />
                 <label>{this.state.message}</label>
             </div>
         );
     }
-
-
 }
 
 export default ForgotPassword;
