@@ -57,8 +57,10 @@ class NPSComponent extends React.Component {
         return (parseFloat(value) * Math.PI) / 180;
     }
 
+    // Score algorithm based off of a certain series of criteria
     calculateScore(distance, activityCount, cost) {
         var score = 0;
+        // Distance criteria, points out of 50 maximum
         if (distance <= 250) {
             score += 50;
         } else if (distance <= 750) {
@@ -67,8 +69,10 @@ class NPSComponent extends React.Component {
             score += 10;
         }
 
+        // Number of activities, max of 50 points
         score += activityCount < 25 ? activityCount * 2 : 50;
 
+        // Cost of entrance, max of 50 points
         if (cost <= 1) {
             score += 50;
         } else if (cost <= 20) {
@@ -113,7 +117,7 @@ class NPSComponent extends React.Component {
         }
         */
 
-        parkData = [].concat(this.state.parks).sort((a, b) => a.score - b.score);
+        parkData = [].concat(this.state.parks).sort((a, b) => b.score - a.score);
 
         this.setState({ parks: parkData });
     }
@@ -132,7 +136,7 @@ class NPSComponent extends React.Component {
                 {this.state.parks?.map((park) => (
                     <div>
                         {park.fullName} | {park.activities} | {park.price} |
-                        {this.calculateDistance("31.559814", "-97.141800", park.lat, park.long)} |
+                        {this.calculateDistance(wacoLat, wacoLon, park.lat, park.long)} |
                         {park.score}
                     </div>
                 ))}
