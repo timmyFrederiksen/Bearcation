@@ -10,6 +10,9 @@ class NPSComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = { parks: [], sortType: 0 };
+        this.sortByFee = this.sortByFee.bind(this);
+        this.sortByLocation = this.sortByLocation.bind(this);
+        this.resetSort = this.resetSort.bind(this);
     }
 
     componentDidMount() {
@@ -46,16 +49,18 @@ class NPSComponent extends React.Component {
     }
 
     sort() {
-        var parkData;
+        var parkData = this.state.parks;
         switch (this.state.sortType) {
             case 1:
                 parkData = [].concat(this.state.parks).sort((a, b) => a.price - b.price);
                 break;
             case 2:
-                parkData = [].concat(this.state.parks).sort((a, b) => a.latitude - b.latitude);
+                parkData = [].concat(this.state.parks).sort((a, b) => a.lat - b.lat);
                 break;
             default:
-                parkData = [].concat(this.state.parks).sort((a, b) => a.fullName - b.fullName);
+                parkData = []
+                    .concat(this.state.parks)
+                    .sort((a, b) => a.fullName.localeCompare(b.fullName));
                 break;
         }
 
@@ -69,19 +74,12 @@ class NPSComponent extends React.Component {
                     <h1>National Park Service Data</h1>
                 </div>
                 <div>
-                    <form>
-                        <input type="button" value="Sort by Fee" onChange={this.sortByFee} />
-
-                        <input
-                            type="button"
-                            value="Sort by Location"
-                            onChange={this.sortByLocation}
-                        />
-
-                        <input type="button" value="Sort" onChange={this.resetSort} />
-                    </form>
+                    <button onClick={this.sortByFee}>Sort by Fee</button>
+                    <button onClick={this.sortByLocation}>Sort by Location</button>
+                    <button onClick={this.resetSort}>Sort Alphabetically</button>
                 </div>
                 {<div>{this.state.parks.length}</div>}
+                <div>{this.state.sortType}</div>
                 {this.state.parks?.map((park) => (
                     <div>
                         {park.fullName} | {park.activities} | {park.price} | {park.lat} |{" "}
