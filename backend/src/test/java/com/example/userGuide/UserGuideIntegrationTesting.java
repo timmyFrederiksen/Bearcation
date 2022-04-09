@@ -44,21 +44,21 @@ public class UserGuideIntegrationTesting {
         return "http://localhost:" + port + uri;
     }
 
-//    @Test
-//    public void addCourse() {
-//
-//        User user = new User("Himel", "Rahman", "rahman@gmail.com");
-//
-//        HttpEntity<User> entity = new HttpEntity<User>(user, headers);
-//
-//        ResponseEntity<String> response = restTemplate.exchange(
-//                createURLWithPort("/user/post"),
-//                HttpMethod.POST, entity, String.class);
-//
-//        String actual = response.getHeaders().get(HttpHeaders.LOCATION).get(0);
-//
-//        assertTrue(actual.contains("/user/post/"));
-//
-//    }
+    @Test
+    public void addCourse() {
+
+        User user = new User("Himel", "Rahman", "rahman@gmail.com");
+
+        HttpEntity<User> entity = new HttpEntity<User>(user, headers);
+
+        ResponseEntity<String> response = restTemplate.exchange(
+                createURLWithPort("/user/post"),
+                HttpMethod.POST, entity, String.class);
+
+        String actual = response.getHeaders().get(HttpHeaders.LOCATION).get(0);
+
+        assertTrue(actual.contains("/user/post/"));
+
+    }
 
 }

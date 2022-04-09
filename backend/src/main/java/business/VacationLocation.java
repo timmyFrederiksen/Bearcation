@@ -33,4 +33,5 @@ public class VacationLocation {
         this.address = address;
         this.price = price;
     }
+
 }
