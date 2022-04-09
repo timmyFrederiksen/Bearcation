@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import bearcation.model.Park;
 import bearcation.service.NPService;
 
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("bearcation/")
 public class BearcationController {
@@ -15,9 +15,9 @@ public class BearcationController {
 
   private Park park;
 
-
   @GetMapping("parks")
   public String getTest(){
+    park = new Park();
     return park.test();
   }
 }
