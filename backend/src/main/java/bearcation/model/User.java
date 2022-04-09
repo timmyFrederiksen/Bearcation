@@ -31,6 +31,12 @@ public class User {
         //this.password = passwordEncoder.encode(password);
         this.username = username;
     }
+    public User(String password, String username, long id){
+        super();
+        this.password = password;
+        this.username = username;
+        this.id = id;
+    }
     public long getId() {
         return id;
     }

@@ -1,10 +1,10 @@
 package model;
 // Feel free to change anything you want here
 
-import com.example.userGuide.Constroller.*;
+import bearcation.controller.*;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.*;
-import com.example.userGuide.model.*;
+import bearcation.model.*;
 import org.mockito.*;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(value = UserController.class)
+@WebMvcTest(value = BearcationController.class)
 //@WithMockUser (not working, going to try without this)
 public class UserTests {
 
@@ -31,17 +31,16 @@ public class UserTests {
     private MockMvc mockMvc;
 
     @MockBean
-    private UserController usercontroller;
+    private BearcationController bearcationController;
 
-    User user = new User("password", "test123");
-    user.setId(6942069L);
+    User user = new User("password", "test123", 6942069L);
 
     String exampleUserJson = "{\"id\":\"6942069\",\"password\":\"password\",\"username\":\"test123\"}";
 
     @Test
     public void retrieveUser() throws Exception {
 
-        Mockito.when(usercontroller.UserById(6942069L)).thenReturn(user);
+        Mockito.when(bearcationController.UserById(6942069L)).thenReturn(user);
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get(
                 "/user/6942069").accept(
@@ -64,7 +63,7 @@ public class UserTests {
         mockUser.setId(id);
 
         // userService. to respond back with mockCourse
-        Mockito.when(usercontroller.createEmployee(Mockito.any(User.class))).thenReturn(mockUser);
+        Mockito.when(bearcationController.createEmployee(Mockito.any(User.class))).thenReturn(mockUser);
 
         // Send course as body to /user/12049710259
         RequestBuilder requestBuilder = MockMvcRequestBuilders

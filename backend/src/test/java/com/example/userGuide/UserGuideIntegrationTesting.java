@@ -1,6 +1,7 @@
 package com.example.userGuide;
 
-import com.example.userGuide.model.User;
+import bearcation.BearcationApplication;
+import bearcation.model.User;
 import org.json.JSONException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = UserGuideApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = BearcationApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class UserGuideIntegrationTesting {
 
     @LocalServerPort
@@ -47,7 +48,7 @@ public class UserGuideIntegrationTesting {
     @Test
     public void addCourse() {
 
-        User user = new User("Himel", "Rahman", "rahman@gmail.com");
+        User user = new User("Himel", "Rahman");
 
         HttpEntity<User> entity = new HttpEntity<User>(user, headers);
 
