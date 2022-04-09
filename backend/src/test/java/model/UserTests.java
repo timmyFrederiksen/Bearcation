@@ -1,4 +1,5 @@
 package model;
+// Feel free to change anything you want here
 
 import com.example.userGuide.Constroller.*;
 import org.junit.jupiter.api.Test;
@@ -9,14 +10,17 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.util.Arrays;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(value = UserController.class)
@@ -32,10 +36,6 @@ public class UserTests {
     User user = new User("password", "test123");
     user.setId(6942069L);
 
-//    String exampleCourseJson =
-//            "{\"name\":\"Spring\",\"description\":\"10Steps\",\"steps\":[\"Learn
-//    Maven\",\"Import Project\",\"First Example\",\"Second Example\"]}";
-// Do we need this Json stuff either???
     String exampleUserJson = "{\"id\":\"6942069\",\"password\":\"password\",\"username\":\"test123\"}";
 
     @Test
@@ -54,6 +54,33 @@ public class UserTests {
 
         JSONAssert.assertEquals(expected, result.getResponse()
                 .getContentAsString(), false);
+
+    }
+
+    @Test
+    public void createUserTest() throws Exception {
+        long id = 12049710259L;
+        User mockUser = new User("neverguessthis", "sickomode");
+        mockUser.setId(id);
+
+        // userService. to respond back with mockCourse
+        Mockito.when(usercontroller.createEmployee(Mockito.any(User.class))).thenReturn(mockUser);
+
+        // Send course as body to /user/12049710259
+        RequestBuilder requestBuilder = MockMvcRequestBuilders
+                .post("/user/12049710259")
+
+                .accept(MediaType.APPLICATION_JSON).content(exampleUserJson)
+                .contentType(MediaType.APPLICATION_JSON);
+
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+        MockHttpServletResponse response = result.getResponse();
+
+        assertEquals(HttpStatus.CREATED.value(), response.getStatus());
+
+        assertEquals("http://localhost/user/12049710259",
+                response.getHeader(HttpHeaders.LOCATION));
 
     }
 
