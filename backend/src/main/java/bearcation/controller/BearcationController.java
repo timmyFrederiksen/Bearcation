@@ -1,7 +1,11 @@
 package bearcation.controller;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import bearcation.model.Park;
 import bearcation.service.NPService;
@@ -13,11 +17,24 @@ public class BearcationController {
   @Autowired
   private NPService npService;
 
-  private Park park;
+  // TODO: Remove later
+  @GetMapping("parksTest")
+  public String getTest(){
+    return npService.getTest();
+  }
 
   @GetMapping("parks")
-  public String getTest(){
-    park = new Park();
-    return park.test();
+  public List<Object> getParks(){
+    return npService.getParks();
+  }
+
+  @GetMapping("countries")
+  public List<Object> getCountries(){
+    String url = "https://restcountries.eu/rest/v2/all";
+    RestTemplate restTemplate = new RestTemplate();
+
+    Object[] countries = restTemplate.getForObject(url, Object[].class);
+
+    return Arrays.asList(countries);
   }
 }
