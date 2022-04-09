@@ -1,4 +1,4 @@
-package business;
+package bearcation.business;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package business;
+package bearcation.business;
 
 public class Notification {
 

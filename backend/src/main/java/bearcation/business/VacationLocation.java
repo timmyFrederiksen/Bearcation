@@ -1,4 +1,4 @@
-package business;
+package bearcation.business;
 // Note: feel free to change anything in here
 public class VacationLocation {
 
