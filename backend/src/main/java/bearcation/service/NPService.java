@@ -1,6 +1,7 @@
 package bearcation.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,16 +17,20 @@ public class NPService {
 
   private String url = baseUrl + "parks?limit=500&" + api_key;
 
+  //@Autowired
+  //RestTemplate restTemplate;
+
   // TODO: Remove Later
   public String getTest(){
     return url;
   }
 
-  public List<Object> getParks(){
+  public ResponseEntity<String> getParks(){
     RestTemplate restTemplate = new RestTemplate();
 
-    Object[] parks = restTemplate.getForObject(url, Object[].class);
+    //Object[] parks = restTemplate.getForObject(url, Object[].class);
 
-    return Arrays.asList(parks);
+    //return Arrays.asList(parks);
+    return restTemplate.getForEntity(url, String.class);
   }
 }

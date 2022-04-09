@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -24,7 +25,7 @@ public class BearcationController {
   }
 
   @GetMapping("parks")
-  public List<Object> getParks(){
+  public ResponseEntity<String> getParks(){
     return npService.getParks();
   }
 
