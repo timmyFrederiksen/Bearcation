@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import bearcation.model.Park;
+import bearcation.model.User;
 import bearcation.service.NPService;
+import bearcation.service.UserService;
 
 //@CrossOrigin(origins = "*")
 @RestController
@@ -38,4 +40,31 @@ public class BearcationController {
 
     return Arrays.asList(countries);
   }
+
+  // User Code
+  @Autowired
+    private UserService userService;
+
+    @GetMapping("users")
+    public List<User> getUsers() {
+        return userService.getUsers();
+    }
+
+    @GetMapping("/{id}")
+    public User UserById(@PathVariable("id") Long id) {
+        return userService.userById(id);
+    }
+
+    @PostMapping("users")
+    public User createEmployee(@RequestBody User employee) {
+        return userService.createUser(employee);
+    }
+    /*
+    @PostMapping("post")
+    @ResponseStatus(HttpStatus.CREATED)
+    public User createUser(@RequestBody User user) {
+        return userService.createUser(user);
+    }
+
+     */
 }
