@@ -1,4 +1,4 @@
-package bearcation.business;
+package bearcation.model;
 
 public class Notification {
 
