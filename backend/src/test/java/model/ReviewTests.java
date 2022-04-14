@@ -29,7 +29,7 @@ public class ReviewTests {
 
         assertEquals(rate, r.getRating());
         assertEquals(desc, r.getDescription());
-        assertEquals(s, r.getSurvey());
+        assertEquals(s.getAnswerList(), r.getSurvey().getAnswerList());
     }
 
     @Test
