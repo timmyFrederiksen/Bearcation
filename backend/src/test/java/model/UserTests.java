@@ -2,6 +2,7 @@ package model;
 // Feel free to change anything you want here
 
 import bearcation.controller.*;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.*;
 import bearcation.model.*;
