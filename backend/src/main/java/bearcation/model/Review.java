@@ -9,6 +9,9 @@ public class Review {
     private Survey survey;
 
     public Review(Double rating, String description, List<String> answerList) {
+        if(rating == null || description == null || answerList == null){
+            throw new NullPointerException("parameters can't be null");
+        }
         this.rating = rating;
         this.description = description;
         this.survey = new Survey(answerList);
@@ -19,6 +22,9 @@ public class Review {
     }
 
     public void setRating(Double rating) {
+        if(rating == null){
+            throw new NullPointerException("rating is null");
+        }
         Objects.requireNonNull(rating);
 
         if (rating > 5.0 || rating < 0.0) {
