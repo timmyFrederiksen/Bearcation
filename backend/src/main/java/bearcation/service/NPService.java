@@ -39,17 +39,21 @@ public class NPService {
     // Check cache for data?
     ResponseEntity<String> resp;
 
+    // If, data is NOT in cache already
     if (!c.isKeyInCache("park data")) {
-      RestTemplate restTemplate = new RestTemplate();
 
+      // GET request on data
+      RestTemplate restTemplate = new RestTemplate();
       resp = restTemplate.getForEntity(url, String.class);
 
+      // Cache it
       Element e = new Element("park data", resp);
       c.put(e);
 
     } else {
-      Element e = c.get("park data");
 
+      // Otherwise, IF the data is already cached, get it from cache
+      Element e = c.get("park data");
       resp = (ResponseEntity<String>) e.getObjectValue();
     }
 
