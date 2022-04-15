@@ -79,11 +79,11 @@ class NPSComponent extends React.Component {
         let score = 0;
         if(distance <= 50) {
             score += 100;
-        }else if (distance <= 250) {
+        }else if (distance <= 100) {
             score += 50;
-        } else if (distance <= 750) {
+        } else if (distance <= 250) {
             score += 25;
-        } else if (distance <= 1500) {
+        } else if (distance <= 750) {
             score += 10;
         }
 
