@@ -9,13 +9,4 @@ public class BearcationApplication {
   public static void main(String[] args){
     SpringApplication.run(BearcationApplication.class, args);
   }
-
-  //@Autowired
-  //private UserRepository userRepository;
-
-  /*
-  @Override
-  public void run(String...args) throws Exception{
-  }
-  */
 }
