@@ -29,6 +29,10 @@ public class BearcationApplication implements CommandLineRunner {
 
   @Override
   public void run(String...args) throws Exception{
+    this.instantiateDatabase();
+  }
+
+  private void instantiateDatabase(){
     User userTest = new User("testUser", "testPassword");
     Location testLocation = new Location(userTest, "locationName", "testAddress", "testDetails");
     this.userRepository.save(userTest);
