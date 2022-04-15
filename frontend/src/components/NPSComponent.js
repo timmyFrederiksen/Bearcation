@@ -175,7 +175,6 @@ class NPSComponent extends React.Component {
             <div>
                 <div>
                     <h4>Search:</h4>
-
                     <form onSubmit={this.handleSubmit}>
                         <label>
                             Activities:

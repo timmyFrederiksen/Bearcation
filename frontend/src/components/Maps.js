@@ -1,58 +1,41 @@
-import React from "react";
-import Home from "./mapCall";
+import React, {useCallback, useMemo, useRef, useState} from "react";
+import Home from "./GMap";
+import Places from "./places";
+import {GoogleMap, Marker} from "@react-google-maps/api";
 
-class Maps extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
-    /*handleChangeStatus(event) {
-        this.setState({level: event.target.value});
-    }
 
-    handleInputChange(event) {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
 
-        this.setState({
-            [name]: value
-        });
+function Maps() {
 
-        this.sort();
-    }
+    const [vacationLocation, setVacationLocation] = useState();
+    const mapRef = useRef();
+    const center = useMemo(
+        () => ({ lat: 37.5489, lng: -97.1131 }),
+        []
+    );
 
-    componentDidMount() {
-        let parkdata = [];
-        NPSService.getParkInfo().then((response) => {
-            response.data.data.map((park) =>
-                parkdata.push(
-                    new Park(
-                        park.fullName,
-                        park.activities.length,
-                        park.activities,
-                        (park.entranceFees.length > 0) ? park.entranceFees[0].cost : 0,
-                        park.latitude,
-                        park.longitude,
-                    )
-                )
-            );
-            this.setState({ parks: parkdata });
-        });
-    }*/
+    const onLoad = useCallback((map) => (mapRef.current = map), [])
 
-    render() {
-        return (
-            <div className="search-page">
-                <div className="search">
-                    Search
-                </div>
-                <div className="map">
-                    <Home />
-                </div>
+    return (
+        <div className="container">
+            <div className="controls">
+                <h1>Search</h1>
+                <Places  setVacationLocation={(position) => {
+                    setVacationLocation(position);
+                    mapRef.current?.panTo(position);
+                }}/>
             </div>
-        );
-    }
+            <div className="map">
+                <GoogleMap
+                    zoom={10}
+                    center={center}
+                    mapContainerClassName="map-container"
+                    onLoad={onLoad}
+                >
+                </GoogleMap>
+            </div>
+        </div>
+    );
 }
 
 export default Maps;

@@ -6,8 +6,7 @@ import ForgotPassword from "./components/ForgotPassword";
 import HomePage from "./components/HomePage"
 import Login from "./components/Login";
 import NPSComponent from './components/NPSComponent';
-import Home from "./components/mapCall";
-import Maps from "./components/Maps";
+import Home from "./components/GMap";
 
 function App() {
     return (
@@ -18,7 +17,7 @@ function App() {
             <Route path='/forgot-password' element={<ForgotPassword/>}/>
             <Route path='/home' element={<HomePage/>}/>
             <Route path='/nps' element={<NPSComponent/>}/>
-            <Route path='/search' element={<Maps/>}/>
+            <Route path='/search' element={<Home/>}/>
         </Routes>
     </div>
 
