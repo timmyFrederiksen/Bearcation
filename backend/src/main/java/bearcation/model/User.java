@@ -40,4 +40,11 @@ public class User{
         this.username = username;
         this.password = password;
     }
+
+    public User(String password, String username, long id) {
+        super();
+        this.id = id;
+        this.username = username;
+        this.password = password;
+    }
 }
