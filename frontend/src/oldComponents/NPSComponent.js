@@ -1,5 +1,5 @@
 import React from "react";
-import Park from "../models/Park";
+import Park from "./Park";
 import NPSService from "../services/NPSService";
 
 const wacoLat = "31.559814";

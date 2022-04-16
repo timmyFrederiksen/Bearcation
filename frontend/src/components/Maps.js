@@ -2,11 +2,13 @@ import React, {useCallback, useMemo, useRef, useState} from "react";
 import Home from "./GMap";
 import Places from "./places";
 import {Circle, GoogleMap, Marker} from "@react-google-maps/api";
+import { useNavigate } from "react-router-dom";
 
 
 
 function Maps() {
 
+    const navigate = useNavigate();
     const [vacationLocation, setVacationLocation] = useState();
     const mapRef = useRef();
     const center = useMemo(
@@ -20,10 +22,11 @@ function Maps() {
         <div className="container">
             <div className="controls">
                 <h1>Search</h1>
-                <Places  setVacationLocation={(position) => {
+                <Places setVacationLocation={(position) => {
                     setVacationLocation(position);
                     mapRef.current?.panTo(position);
                 }}/>
+                <button onClick={() => navigate('/home')}>Search</button>
             </div>
             <div className="map">
                 <GoogleMap
@@ -34,7 +37,7 @@ function Maps() {
                 >
                     {vacationLocation && (
                     <>
-                        <Marker position={vacationLocation} />}
+                        <Marker position={vacationLocation} />
 
                         <Circle center={vacationLocation} radius={85000} options={closeOptions} />
                         <Circle center={vacationLocation} radius={160934} options={middleOptions} />
