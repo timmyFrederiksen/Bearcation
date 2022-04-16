@@ -20,8 +20,6 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="review_id")
     private long id;
-
-
     private @NonNull Double rating;
     String description;
 

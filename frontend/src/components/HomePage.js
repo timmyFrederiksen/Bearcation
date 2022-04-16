@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import UserService from '../services/UserService';
 import axios from 'axios';
 
@@ -10,7 +9,7 @@ class HomePage extends React.Component {
 
     render() {
         return (
-            <div className="HomeDashboard">
+            <div className="HomePage">
                 <h1>Home</h1>
             </div>
         );

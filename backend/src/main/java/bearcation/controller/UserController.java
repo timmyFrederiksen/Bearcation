@@ -1,7 +1,7 @@
 package bearcation.controller;
 
-import bearcation.service.UserService;
 import bearcation.model.User;
+import bearcation.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,4 +52,3 @@ public class UserController {
 
      */
 }
-

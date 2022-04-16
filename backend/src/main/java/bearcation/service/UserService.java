@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +25,17 @@ public class UserService {
         return this.userRepository.findAll();
     }
 
+    public List<User> create(){
+        User user = new User("123456", "John");
+        List<User> users = new ArrayList<User>();
+        List<User> savedUsers = new ArrayList<User>();
+
+        users.add(user);
+        Iterable<User> itrStudents=userRepository.saveAll(users);
+        itrStudents.forEach(savedUsers::add);
+        return savedUsers;
+    }
+
     public User createUser(User user){
         return userRepository.save(user);
     }
@@ -32,19 +44,14 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public User userById(@PathVariable("id") Long id) {
+    public User userById(Long id) {
         Optional<User> optionalUser = userRepository.findById(id);
-        if (optionalUser.isPresent()) {
-            return optionalUser.get();
-        }
-        return null;
+        return optionalUser.orElse(null);
     }
+
     public User userByPassword(User u) {
         Optional<User> optionalUser = userRepository.findByUsernameAndPassword(u.getUsername(), u.getPassword());
-        if (optionalUser.isPresent()) {
-            return optionalUser.get();
-        }
-        return null;
+        return optionalUser.orElse(null);
     }
 
     public void updateUser(User user) {

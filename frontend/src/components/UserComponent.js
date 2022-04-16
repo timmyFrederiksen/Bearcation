@@ -89,30 +89,6 @@ class UserComponent extends React.Component {
                 </div>
                 <br />
                 <label>{this.state.message}</label>
-
-                {/*<h1 className = "text-center"> Users List</h1>*/}
-                {/*<table className = "table table-striped">*/}
-                {/*    <thead>*/}
-                {/*    <tr>*/}
-                {/*        <td> User Id</td>*/}
-                {/*        <td> User Username</td>*/}
-                {/*        <td> User Password</td>*/}
-                {/*    </tr>*/}
-
-                {/*    </thead>*/}
-                {/*    <tbody>*/}
-                {/*    {*/}
-                {/*        this.accounts.map(*/}
-                {/*            user =>*/}
-                {/*                <tr key = {user.id}>*/}
-                {/*                    <td> {user.id}</td>*/}
-                {/*                    <td> {user.username}</td>*/}
-                {/*                    <td> {user.password}</td>*/}
-                {/*                </tr>*/}
-                {/*        )*/}
-                {/*    }*/}
-                {/*    </tbody>*/}
-                {/*</table>*/}
             </div>
         );
     }

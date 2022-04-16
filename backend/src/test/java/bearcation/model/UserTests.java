@@ -1,6 +1,7 @@
-package model;
+package bearcation.model;
 // Feel free to change anything you want here
 
+import bearcation.BearcationApplication;
 import bearcation.controller.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,7 @@ import org.mockito.*;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -49,8 +51,7 @@ public class UserTests {
 
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 
-        System.out.println(result.getResponse());
-        String expected = "{id:6942069,password:'password',username:'test123'}";
+        String expected = "{id:6942069,password:password,username:test123}";
 
         JSONAssert.assertEquals(expected, result.getResponse()
                 .getContentAsString(), false);
@@ -83,5 +84,6 @@ public class UserTests {
                 response.getHeader(HttpHeaders.LOCATION));
 
     }
+
 
 }
