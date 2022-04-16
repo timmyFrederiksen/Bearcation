@@ -50,7 +50,7 @@ public class UserTests {
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 
         System.out.println(result.getResponse());
-        String expected = "{id:6942069,password:password,username:test123}";
+        String expected = "{id:6942069,password:'password',username:'test123'}";
 
         JSONAssert.assertEquals(expected, result.getResponse()
                 .getContentAsString(), false);
@@ -83,6 +83,5 @@ public class UserTests {
                 response.getHeader(HttpHeaders.LOCATION));
 
     }
-
 
 }

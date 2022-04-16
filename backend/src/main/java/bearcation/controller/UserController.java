@@ -1,41 +1,54 @@
 package bearcation.controller;
 
-import java.net.URI;
-import java.util.List;
-import java.util.Optional;
-
-
 import bearcation.model.User;
 import bearcation.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@CrossOrigin(origins = "*")
 @RestController
+@RequestMapping("/user")
 public class UserController {
     @Autowired
-    private UserService userservice;
+    private UserService userService;
+
+    @GetMapping("/users")
+    public List<User> getUsers() {
+        return userService.getUsers();
+    }
+
+    @GetMapping("/{id}")
+    public User userById(@PathVariable("id") Long id) {
+        return userService.userById(id);
+    }
 
     @PostMapping("/users")
-    public ResponseEntity<Void> createUser(){
-        User user = new User("123456", "John");
-
-        List<User> userList  =  userservice.create();
-
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path(
-                "/{id}").buildAndExpand(userList.get(0).getId()).toUri();
-
-        return ResponseEntity.created(location).build();
+    public User createEmployee(@RequestBody User employee) {
+        return userService.createUser(employee);
     }
 
-    @GetMapping("/users/{userId}")
-    public User retrieveStudent(@PathVariable long userId) {
-        return userservice.retrieveUser(userId);
+    @PostMapping("/check")
+    public User checkEmployee(@RequestBody User employee) {
+        return userService.userByPassword(employee);
     }
 
+    @PutMapping("/update")
+    public void updateLocation(@RequestBody User user){
+        userService.updateUser(user);
+    }
 
+    @DeleteMapping("/delete/{username}")
+    public void deleteLocation(@PathVariable String username){
+        userService.deleteUser(username);
+    }
+    /*
+    @PostMapping("post")
+    @ResponseStatus(HttpStatus.CREATED)
+    public User createUser(@RequestBody User user) {
+        return userService.createUser(user);
+    }
+
+     */
 }

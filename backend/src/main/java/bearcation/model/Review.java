@@ -1,56 +1,41 @@
 package bearcation.model;
 
-import java.util.List;
-import java.util.Objects;
 
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
+import javax.persistence.*;
+
+
+@Entity
+@Table(name = "reviews")
+@Data
+@NoArgsConstructor
 public class Review {
-    private Double rating;
-    private String description;
-    private Survey survey;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="review_id")
+    private long id;
+    private @NonNull Double rating;
+    String description;
 
-    public Review(Double rating, String description, List<String> answerList) {
-        if(rating == null || description == null || answerList == null){
-            throw new NullPointerException("parameters can't be null");
-        }
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private @NonNull User reviewer;
+
+    @ManyToOne
+    @JoinColumn(name = "location_id")
+    private @NonNull Location location;
+
+    public Review(Double rating, String description, User user, Location location) {
+        super();
         this.rating = rating;
         this.description = description;
-        this.survey = new Survey(answerList);
-    }
-
-    public Double getRating() {
-        return rating;
-    }
-
-    public void setRating(Double rating) {
-        if(rating == null){
-            throw new NullPointerException("rating is null");
-        }
-        Objects.requireNonNull(rating);
-
-        if (rating > 5.0 || rating < 0.0) {
-            throw new IllegalArgumentException("Illegal rating value was given");
-        }
-
-        this.rating = rating;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        Objects.requireNonNull(description);
-
-        this.description = description;
-    }
-
-    public Survey getSurvey() {
-        return survey;
-    }
-
-    public void setSurvey(Survey survey) {
-        Objects.requireNonNull(survey);
-
-        this.survey = survey;
+        this.reviewer = user;
+        this.location = location;
     }
 }

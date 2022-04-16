@@ -1,59 +1,50 @@
 package bearcation.model;
 
-import javax.annotation.Resource;
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+//import org.hibernate.validator.constraints.Length;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
-//import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-//import org.springframework.security.crypto.password.PasswordEncoder;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User {
-    //transient PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="user_id")
     private long id;
 
-    @Column(name = "password")
+    private String username;
     private String password;
 
-    @Column(name = "username")
-    private String username;
+    @JsonIgnore
+    @OneToMany(mappedBy="owner", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Location> ownedLocations;
 
-    public User() {
+    @OneToMany(mappedBy="reviewer", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Review> postedReviews;
 
-    }
-
-    public User(String password, String username) {
+    public User( String username, String password) {
         super();
-        this.password = password;
-        //this.password = passwordEncoder.encode(password);
         this.username = username;
+        this.password = password;
     }
-    public User(String password, String username, long id){
+
+    public User(String password, String username, long id) {
         super();
-        this.password = password;
-        this.username = username;
         this.id = id;
-    }
-    public long getId() {
-        return id;
-    }
-    public void setId(long id) {
-        this.id = id;
-    }
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        //this.password = passwordEncoder.encode(password);
-        this.password = password;
-    }
-    public String getUsername() {
-        return username;
-    }
-    public void setLastName(String username) {
         this.username = username;
+        this.password = password;
     }
 }
