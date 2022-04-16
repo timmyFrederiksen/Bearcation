@@ -59,6 +59,6 @@ public class UserService {
     }
 
     public void deleteUser(String username) {
-        userRepository.deleteByName(username);
+        userRepository.deleteByUsername(username);
     }
 }
