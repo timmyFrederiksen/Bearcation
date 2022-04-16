@@ -1,12 +1,28 @@
 import React, { useState} from "react";
 import { useNavigate, Link } from "react-router-dom"
+import axios from 'axios';
 
 
- const handleSubmit = async (e, navigate) => {
+
+const login = async (props) => {
+    const userDto = {
+        password: props.password,
+        username: props.username
+    };
+
+    axios.post("http://localhost:80/user/users", userDto)
+        .then(res => {
+            console.log(res);
+            alert("Welcome " + this.state.username + " " + this.state.password);
+        })
+
+    return userDto;
+}
+
+
+ const handleSubmit = async (e, navigate, username, password) => {
 
     e.preventDefault();
-
-    alert('username')
 
     const response = await login(username, password);
     if(response != null){
@@ -29,7 +45,7 @@ function NewLogin(){
     return (
         <div className="loginBody">
             <h1>Login</h1>
-            <form className = "loginForm" onSubmit={e => handleSubmit(e, navigate)} >
+            <form className = "loginForm" onSubmit={e => handleSubmit(e, navigate, username, password)} >
                 <div className="usernameArea">
                     <label>
                         Username:
