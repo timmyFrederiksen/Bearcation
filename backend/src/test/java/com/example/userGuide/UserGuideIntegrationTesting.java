@@ -36,7 +36,7 @@ public class UserGuideIntegrationTesting {
                 createURLWithPort("/user/1"),
                 HttpMethod.GET, entity, String.class);
 
-        String expected = "{id:1,firstName:Ramesh,lastName:Fadatare,email:ramesh@gmail.com}";
+        String expected = "{id:1,firstName:'Ramesh',lastName:'Fadatare',email:'ramesh@gmail.com'}";
 
         JSONAssert.assertEquals(expected, response.getBody(), false);
     }

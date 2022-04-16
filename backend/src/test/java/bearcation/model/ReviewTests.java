@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @Nested
 @DisplayName("Review Tests")
 public class ReviewTests {
-
+/*
     @Test
     @DisplayName("Review Constructor Good Values")
     public void testRevConstructor() {
@@ -78,4 +78,6 @@ public class ReviewTests {
 
         assertThrows(NullPointerException.class, () -> {r.setDescription(null);});
     }
+
+ */
 }

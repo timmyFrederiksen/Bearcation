@@ -51,7 +51,7 @@ public class UserTests {
 
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 
-        String expected = "{id:6942069,password:password,username:test123}";
+        String expected = "{id:6942069,password:'password',username:'test123'}";
 
         JSONAssert.assertEquals(expected, result.getResponse()
                 .getContentAsString(), false);
