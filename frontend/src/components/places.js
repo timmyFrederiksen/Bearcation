@@ -15,14 +15,14 @@ import {Carousel} from "bootstrap";
 import {useRef} from "react";
 import {GoogleMap} from "@react-google-maps/api";
 
-type PlacesProps = {
-    setVacationLocation: (position: google.maps.LatLngLiteral) => void;
-};
+// type PlacesProps = {
+//     setVacationLocation: (position: google.maps.LatLngLiteral) => void;
+// };
 
-export default function Places({setVacationLocation}: PlacesProps) {
+export default function Places({setVacationLocation}) {
     const {ready, value, setValue, suggestions: {status, data}, clearSuggestions} = usePlacesAutocomplete();
 
-    const handleSelect = async (val: string) => {
+    const handleSelect = async (val) => {
         setValue(val, false);
         clearSuggestions();
 
