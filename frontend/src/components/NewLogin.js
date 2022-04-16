@@ -4,16 +4,16 @@ import axios from 'axios';
 
 
 
-const login = async (props) => {
+const login = async (username, password) => {
     const userDto = {
-        password: props.password,
-        username: props.username
+        username: username,
+        password: password
     };
 
     axios.post("http://localhost:80/user/users", userDto)
         .then(res => {
             console.log(res);
-            alert("Welcome " + this.state.username + " " + this.state.password);
+            alert("Welcome " + res.data.username + " " + res.data.password);
         })
 
     return userDto;
