@@ -22,6 +22,20 @@ public class LocationController {
     public List<Location> getLocations() {
         return locationService.getLocations();
     }
+    @GetMapping("/search/{id}")
+    public Location getLocationById(@PathVariable long id){
+        return locationService.getLocationById(id);
+    }
+    @DeleteMapping("/delete/{name}")
+    public void deleteLocation(@PathVariable String name){
+        locationService.deleteLocation(name);
+    }
+
+    @PutMapping("/update/{name}")
+    public void updateLocation(@PathVariable String name, @RequestBody Location location){
+        locationService.updateLocation(name, location);
+    }
+
 
     @PostMapping("/addLocation")
     public Location saveLocation(@RequestBody Location location){

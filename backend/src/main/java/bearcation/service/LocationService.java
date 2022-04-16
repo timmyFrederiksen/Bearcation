@@ -36,4 +36,19 @@ public class LocationService {
         return locationRepository.save(location);
     }
 
+    public Location getLocationById(long id) {
+        Optional<Location> optionalLocation= this.locationRepository.findById(id);
+        if (optionalLocation.isPresent()) {
+            return optionalLocation.get();
+        }
+        return null;
+    }
+
+    public void deleteLocation(String name) {
+        locationRepository.deleteByName(name);
+    }
+
+    public void updateLocation(String name, Location location) {
+        locationRepository.save(location);
+    }
 }

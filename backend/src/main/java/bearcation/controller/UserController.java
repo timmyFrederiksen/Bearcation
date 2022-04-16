@@ -33,6 +33,16 @@ public class UserController {
     public User checkEmployee(@RequestBody User employee) {
         return userService.userByPassword(employee);
     }
+
+    @PutMapping("/update")
+    public void updateLocation(@RequestBody User user){
+        userService.updateUser(user);
+    }
+
+    @DeleteMapping("/delete/{username}")
+    public void deleteLocation(@PathVariable String username){
+        userService.deleteUser(username);
+    }
     /*
     @PostMapping("post")
     @ResponseStatus(HttpStatus.CREATED)
@@ -42,5 +52,4 @@ public class UserController {
 
      */
 }
-
 

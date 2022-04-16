@@ -10,8 +10,9 @@ import java.util.Optional;
 
 @Repository
 public interface LocationRepository extends JpaRepository<Location, Long> {
-    Optional<Location> findLocationsByOwnerId(long user_id);
+    List<Location> findLocationsByOwnerId(long user_id);
     Optional<Location> findByName(String name);
-
+    Optional<Location> findById(long id);
+    void deleteByName(String name);
 
 }
