@@ -49,7 +49,7 @@ public class UserService {
         return optionalUser.orElse(null);
     }
 
-    public User userByPassword(User u) {
+    public User userByUsernameAndPassword(User u) {
         Optional<User> optionalUser = userRepository.findByUsernameAndPassword(u.getUsername(), u.getPassword());
         return optionalUser.orElse(null);
     }
@@ -61,4 +61,5 @@ public class UserService {
     public void deleteUser(String username) {
         userRepository.deleteByUsername(username);
     }
+
 }

@@ -5,28 +5,22 @@ import axios from 'axios';
 import '../styles/login.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 
-const login = async (username, password) => {
+ const handleSubmit = async(e, navigate, username, password) => {
+    e.preventDefault();
     const userDto = {
         username: username,
         password: password
     };
+     let response;
+    await axios.post("http://localhost:80/user/check", userDto)
+     .then(res => {
+         console.log(res);
+         response = res.data;
+         //response = res.data.username;
+     })
 
-    axios.post("http://localhost:80/user/users", userDto)
-        .then(res => {
-            console.log(res);
-            alert("Welcome " + res.data.username + " " + res.data.password);
-        })
-
-    return userDto;
-}
-
-
- const handleSubmit = async (e, navigate, username, password) => {
-
-    e.preventDefault();
-
-    const response = await login(username, password);
-    if(response != null){
+    console.log("response " + response)
+    if(response !== ""){
         navigate('/home')
     }else{
         alert("Credentials do not match any account.")
