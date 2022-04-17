@@ -1,8 +1,9 @@
 import React, { useState} from "react";
 import { useNavigate, Link } from "react-router-dom"
+
 import axios from 'axios';
-
-
+import '../styles/login.css'
+import "bootstrap/dist/css/bootstrap.min.css"
 
 const login = async (username, password) => {
     const userDto = {
@@ -43,36 +44,34 @@ function NewLogin(){
 
 
     return (
-        <div className="loginBody">
-            <h1>Login</h1>
-            <form className = "loginForm" onSubmit={e => handleSubmit(e, navigate, username, password)} >
-                <div className="usernameArea">
-                    <label>
-                        Username:
-                    </label>
-                    <input name = "username" className="usernameBox" value={username} type="text" onChange={e => setUsername(e.target.value)} required />
+        <div className="login-page">
+            <div className="login-body">
+                <h2 className="welcome-tag">Welcome to Bearcation</h2>
+                <form className = "login-form" onSubmit={e => handleSubmit(e, navigate, username, password)} >
+                    <div className="username-group form-group">
+                        <input name = "username" className="form-control" placeholder="Username" value={username} type="text" onChange={e => setUsername(e.target.value)} required />
+                    </div>
+                    <div className="password-group form-group">
+                        <input name = "password" className="form-control" placeholder="Password" value={password} type="password" onChange={e => setPassword(e.target.value)} required />
+                    </div>
+                    <input type="submit" className="btn btn-dark btn-block submit" value="Submit" />
+                </form>
+                <div className="forgot-password">
+                    <nav>
+                        <Link className="login-text" to="/forgot-password">Forgot Password?</Link>
+                    </nav>
                 </div>
-                <div className="passwordArea">
-                    <label>
-                        Password:
-                    </label>
-                    <input name = "password" className="passwordBox" value={password} type="text" onChange={e => setPassword(e.target.value)} required />
+                <div className="createAccount">
+                    <nav>
+                        <Link className="login-text" to="/signup">Create Account</Link>
+                    </nav>
                 </div>
-                <div className="submitArea">
-                    <input type="submit" value="Submit" />
+                <div className="proceedAsGuest">
+                    <nav>
+                        <Link className="login-text" to="/search">Proceed as Guest</Link>
+                    </nav>
                 </div>
-            </form>
-            <div className={"forgotPassword"}>
-                <nav>
-                    <Link to="/forgot-password">Forgot Password?</Link>
-                </nav>
             </div>
-            <div className={"createAccount"}>
-                <nav>
-                    <Link to="/signup">Create Account</Link>
-                </nav>
-            </div>
-            <br />
         </div>
     )
 }

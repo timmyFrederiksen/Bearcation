@@ -44,19 +44,19 @@ public class BearcationController {
 
   // User Code
   @Autowired
-    private UserService userService;
+  private UserService userService;
 
-    @GetMapping("users")
-    public List<User> getUsers() {
-        return userService.getUsers();
-    }
+  @GetMapping("users")
+  public List<User> getUsers() {
+      return userService.getUsers();
+  }
 
-    @GetMapping("/{id}")
-    public User UserById(@PathVariable("id") Long id) {
-        return userService.userById(id);
-    }
+  @GetMapping("/{id}")
+  public User UserById(@PathVariable("id") Long id) {
+      return userService.userById(id);
+  }
 
-    @PostMapping("users")
+  @PostMapping("users")
     public User createEmployee(@RequestBody User employee) {
         return userService.createUser(employee);
     }

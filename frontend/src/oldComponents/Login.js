@@ -153,7 +153,6 @@ class Login extends React.Component {
                         <Link to="/signup">Create Account</Link>
                     </nav>
                 </div>
-                <br />
             </div>
             
         );

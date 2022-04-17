@@ -1,0 +1,30 @@
+* {
+    font-family: Shadows Into Light;
+}
+
+a {
+    color: rgb(0, 0, 0);
+}
+
+a:hover {
+    color: rgb(255, 184, 28);
+}
+
+.login-page {
+    background-image: url('yosemiteMountain.jpg') ; 
+    background-size: cover;
+    height: 100vh;
+}
+
+.login-body {
+    height: 75%;
+    width: 28%;
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 0.5px solid #000000;
+    padding: 10px;
+    background-color: #ffffff;
+}
