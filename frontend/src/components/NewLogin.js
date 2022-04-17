@@ -1,15 +1,9 @@
 import React, { useState} from "react";
 import { useNavigate, Link } from "react-router-dom"
-import Form from 'react-bootstrap/Form'
-import {Button} from "react-bootstrap";
-import { Card, Alert } from "react-bootstrap"
 
 import axios from 'axios';
 import '../styles/login.css'
 import "bootstrap/dist/css/bootstrap.min.css"
-
-
-
 
 const login = async (username, password) => {
     const userDto = {
@@ -58,7 +52,7 @@ function NewLogin(){
                         <input name = "username" className="form-control" placeholder="Username" value={username} type="text" onChange={e => setUsername(e.target.value)} required />
                     </div>
                     <div className="password-group form-group">
-                        <input name = "password" className="form-control" placeholder="Password" value={password} type="text" onChange={e => setPassword(e.target.value)} required />
+                        <input name = "password" className="form-control" placeholder="Password" value={password} type="password" onChange={e => setPassword(e.target.value)} required />
                     </div>
                     <input type="submit" className="btn btn-dark btn-block submit" value="Submit" />
                 </form>
@@ -67,17 +61,16 @@ function NewLogin(){
                         <Link className="login-text" to="/forgot-password">Forgot Password?</Link>
                     </nav>
                 </div>
-                <div className={"createAccount"}>
+                <div className="createAccount">
                     <nav>
                         <Link className="login-text" to="/signup">Create Account</Link>
                     </nav>
                 </div>
-                <div className={"proceedAsGuest"}>
+                <div className="proceedAsGuest">
                     <nav>
                         <Link className="login-text" to="/search">Proceed as Guest</Link>
                     </nav>
                 </div>
-                <br />
             </div>
         </div>
     )

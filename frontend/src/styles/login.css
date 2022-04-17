@@ -1,11 +1,3 @@
-html,
-body {
-    padding: 0;
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
 a {
     color: rgb(0, 0, 0);
 }
@@ -56,48 +48,19 @@ a:hover {
     text-decoration: none;
     color: #000000;
 }
-
-* {
-    box-sizing: border-box;
-  }
     
-  .navbar-light {
-    background-color: #ffffff;
-    box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
-  }
   
-  .outer {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    text-align: left;
-  }
-  
-  .inner {
-    width: 450px;
-    margin: auto;
-    background: #ffffff;
-    box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
-    padding: 40px 55px 45px 55px;
-    border-radius: 15px;
-    transition: all .3s;
-  }
-  
-  .custom-control-label {
-    font-weight: 400;
-  }
-  
-  .forgot-password,
-  .forgot-password a {
+.forgot-password,
+.forgot-password a {
     padding-top: 10px;
     margin: 0;
-  }
+}
 
-  .proceedAsGuest {
-      padding-top: 25%;
-      padding-left: 60%;
-  }
+.proceedAsGuest {
+    padding-top: 25%;
+    padding-left: 60%;
+}
 
-  .submit {
-      width: 40%;
-  }
+.submit {
+    width: 40%;
+}

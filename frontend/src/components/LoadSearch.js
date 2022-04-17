@@ -9,8 +9,8 @@ import {
     MarkerClusterer,
 } from "@react-google-maps/api";
 
-import '../styles/maps.css'
-import Maps from "./Maps";
+//import '../styles/maps.css'
+import Search from "./Search";
 
 export default function Home() {
     const { isLoaded } = useLoadScript({
@@ -19,7 +19,7 @@ export default function Home() {
     });
 
     if(!isLoaded) return <div>Loading...</div>
-    return (<Maps />);
+    return (<Search />);
 
 }
 
