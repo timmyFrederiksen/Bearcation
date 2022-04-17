@@ -65,30 +65,33 @@ function Explore(){
             <h1>Explore Parks</h1>
             <div className="search-form">
                 <div className="search-group form-group">
-                    <Places setVacationLocation={(position) => {
+                    <Places className="search-text" setVacationLocation={(position) => {
                         setVacationLocation(position);
                         mapRef.current?.panTo(position);
                     }}/>
-                    <button className = "advanced-search">Advanced Search</button>
+                    <button className="advanced-search">Advanced Search</button>
                 </div>
                 <div className="map-group">
-                <GoogleMap
-                    zoom={10}
-                    center={center}
-                    mapContainerClassName="map-container"
-                    onLoad={onLoad}
-                >
-                    {vacationLocation && (
-                    <>
-                        <Marker position={vacationLocation} />
+                    <GoogleMap
+                        zoom={10}
+                        center={center}
+                        mapContainerClassName="map-container"
+                        onLoad={onLoad}
+                    >
+                        {vacationLocation && (
+                        <>
+                            <Marker 
+                                position={vacationLocation}
+                                icon="http://maps.google.com/mapfiles/kml/paddle/blu-circle.png"
+                            />
 
-                        {/* <Circle center={vacationLocation} radius={85000} options={closeOptions} />
-                        <Circle center={vacationLocation} radius={160934} options={middleOptions} />
-                        <Circle center={vacationLocation} radius={402336} options={farOptions} />
-                        <Circle center={vacationLocation} radius={1207000} options={superFarOptions} /> */}
-                    </>
-                    )}
-                </GoogleMap>
+                            {/* <Circle center={vacationLocation} radius={85000} options={closeOptions} />
+                            <Circle center={vacationLocation} radius={160934} options={middleOptions} />
+                            <Circle center={vacationLocation} radius={402336} options={farOptions} />
+                            <Circle center={vacationLocation} radius={1207000} options={superFarOptions} /> */}
+                        </>
+                        )}
+                    </GoogleMap>
                 </div>
                 <div className="places-group">
                     <h1>Parks:</h1>

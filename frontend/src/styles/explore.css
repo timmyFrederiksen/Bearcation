@@ -15,26 +15,55 @@ a:hover {
 }
 
 .explore-body{
-    justify-content: center;
-    padding-left: 50px;
-    padding-right: 50px;
+    text-align: left;
+    justify-content: left;
+    margin-top: 2%;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    border: 0.5px solid #000000;
+}
+.map-group {
+    padding-left: 0%;
 }
 
-
+.map-container {
+    width: 100%;
+    height: 70vh;
+    border: 0.5px solid #000000;
+}
 
 .search-group{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-bottom: 3%;
+    justify-content: left;
+    align-items: left;
+    height: 100px;
+    padding-top: 2%;
+    padding-bottom: 1%;
+}
+
+.combobox-input{
+    height: 50px;
+    width: 50px;
+    border: 0.5px solid #000000;
+    display: inline-block;
+    width: 50%;
+}
+
+.advanced-search{
+    width: 20%;
 }
 
 .places-group {
+    padding-top: 3%;
     font-size: 5px;
 }
 
 .location-card {
     border: 0.5px solid #000000;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-left: 2%;
 }
