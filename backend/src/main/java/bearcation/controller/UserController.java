@@ -25,13 +25,13 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public User createEmployee(@RequestBody User employee) {
-        return userService.createUser(employee);
+    public User createEmployee(@RequestBody User user) {
+        return userService.createUser(user);
     }
 
     @PostMapping("/check")
-    public User checkEmployee(@RequestBody User employee) {
-        return userService.userByPassword(employee);
+    public User checkEmployee(@RequestBody User user) {
+        return userService.userByUsernameAndPassword(user);
     }
 
     @PutMapping("/update")

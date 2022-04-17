@@ -28,6 +28,7 @@ public class LocationService {
     private ReviewRepository reviewRepository;
 
     public List<Location> getLocations() {
+
         return this.locationRepository.findAll();
     }
 
