@@ -9,8 +9,6 @@ import {
     MarkerClusterer,
 } from "@react-google-maps/api";
 
-//import '../styles/maps.css'
-import Search from "./Search";
 import Explore from "./Explore";
 
 export default function Home() {
