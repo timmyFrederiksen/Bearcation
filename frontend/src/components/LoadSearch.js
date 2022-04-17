@@ -11,6 +11,7 @@ import {
 
 //import '../styles/maps.css'
 import Search from "./Search";
+import Explore from "./Explore";
 
 export default function Home() {
     const { isLoaded } = useLoadScript({
@@ -19,7 +20,6 @@ export default function Home() {
     });
 
     if(!isLoaded) return <div>Loading...</div>
-    return (<Search />);
-
+    return (<Explore />);
 }
 

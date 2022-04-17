@@ -10,21 +10,29 @@ a:hover {
     color: rgb(255, 184, 28);
 }
 
-.login-page {
-    background-image: url('yosemiteMountain.jpg') ; 
-    background-size: cover;
-    height: 100vh;
+.location-group{
+    padding-top: 1%;
 }
 
-.login-body {
-    height: 75%;
-    width: 28%;
+.explore-body{
     justify-content: center;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.search-group{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 3%;
+}
+
+.places-group {
+    font-size: 5px;
+}
+
+.location-card {
     border: 0.5px solid #000000;
-    padding: 10px;
-    background-color: #ffffff;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
