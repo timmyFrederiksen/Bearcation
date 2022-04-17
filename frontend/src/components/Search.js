@@ -1,5 +1,5 @@
 import React, {useCallback, useMemo, useRef, useState} from "react";
-import Places from "./places";
+import Places from "./Places";
 import {Circle, GoogleMap, Marker} from "@react-google-maps/api";
 import { useNavigate } from "react-router-dom";
 import '../styles/maps.css'

@@ -4,7 +4,7 @@ import {Route, BrowserRouter, Routes, NavLink, Link} from "react-router-dom";
 import UserService from '../services/UserService';
 
 import axios from 'axios';
-import ForgotPassword from "./ForgotPassword";
+import ForgotPassword from "../components/ForgotPassword";
 
 class UserComponent extends React.Component {
     accounts = [];
