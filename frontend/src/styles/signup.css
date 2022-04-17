@@ -6,13 +6,13 @@ a:hover {
     color: rgb(255, 184, 28);
 }
 
-.login-page {
-    background-image: url('../assets/yosemiteMountain.jpg') ; 
+.signup-page {
+    background-image: url('../assets/sunset-in-yosemite-valley.jpg') ; 
     background-size: cover;
     height: 100vh;
 }
 
-.login-body {
+.signup-body {
     font-family: Shadows Into Light;
     height: 75%;
     width: 28%;
@@ -27,7 +27,7 @@ a:hover {
     opacity: 90%;
 }
 
-.welcome-tag {
+.create-tag {
     padding-top: 20px;
     padding-bottom: 25px;
 }
@@ -45,7 +45,13 @@ a:hover {
     padding-right: 10px;
 }
 
-.login-text {
+.confirm-password-group {
+    padding-bottom: 25px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.signup-text {
     text-decoration: none;
     color: #000000;
 }
@@ -57,10 +63,6 @@ a:hover {
     margin: 0;
 }
 
-.proceedAsGuest {
-    padding-top: 25%;
-    padding-left: 60%;
-}
 
 .submit {
     width: 40%;
