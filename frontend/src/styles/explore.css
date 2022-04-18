@@ -27,6 +27,7 @@ a:hover {
     border: 0.5px solid #000000;
 }
 .map-group {
+    margin-top: 5%;
     padding-left: 0%;
 }
 
@@ -37,23 +38,32 @@ a:hover {
 }
 
 .search-group{
-    justify-content: left;
-    align-items: left;
-    height: 100px;
+    display: flex;                  /* establish flex container */
+    flex-direction: row;            /* default value; can be omitted */
+    flex-wrap: nowrap;              /* default value; can be omitted */
+    justify-content: space-between;
     padding-top: 2%;
-    padding-bottom: 1%;
+    width: 100%;
 }
 
 .combobox-input{
     height: 50px;
-    width: 50px;
     border: 0.5px solid #000000;
     display: inline;
+    width: 100%;
+}
+
+.cb {
     width: 50%;
 }
 
-.advanced-search{
-    width: 20%;
+.advanced-search-button-group{
+    display: inline-block;
+}
+
+.advanced-search-group{
+    margin-top: 5%;
+    margin-bottom: 3%;
 }
 
 .places-group {
@@ -66,9 +76,27 @@ a:hover {
     padding-top: 2%;
     padding-bottom: 2%;
     padding-left: 2%;
+    display: flex;
+    align-items: center;
 }
 
-.cb {
-    padding-right: 15%;
+
+
+.location-card-navigate{
+    margin-left: auto; 
+    margin-right: 2%;
     display: inline;
+}
+
+.location-card-detail, .location-card-detail-data {
+    display: inline;
+}
+
+
+.price-slider-group {
+    width: 50%;
+}
+
+.explore-price-label {
+    margin-top: 1%;
 }

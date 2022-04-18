@@ -1,5 +1,7 @@
 import React from 'react';
-import {Route, Routes} from "react-router-dom";
+import './App.css';
+
+import {Route, Routes, BrowserRouter} from "react-router-dom";
 import ForgotPassword from "./components/ForgotPassword";
 import HomePage from "./components/HomePage"
 import NPSComponent from './oldComponents/NPSComponent';
@@ -9,22 +11,26 @@ import Explore from "./components/Explore";
 import NewSignUp from './components/NewSignUp';
 import NewForgotPassword from './components/NewForgotPassword';
 import Facility from './components/Facility';
-
-import './App.css';
+import LocationPage from './components/LocationPage';
+import ReviewPage from './components/ReviewPage';
 
 function App() {
     return (
-    <div className="App">
-        <Routes>
-            <Route exact path='/' element={<NewLogin/>}/>
-            <Route path='/signup' element={<NewSignUp/>}/>
-            <Route path='/forgot-password' element={<NewForgotPassword/>}/>
-            <Route path='/home' element={<HomePage/>}/>
-            <Route path='/nps' element={<NPSComponent/>}/>
-            <Route path='/search' element={<Home/>}/>
-            <Route path='/explore' element={<Explore/>}/>
-            <Route path='/facility' element={<Facility/>}/>
-        </Routes>
+        <div className="App">
+        <BrowserRouter>
+            <Routes>
+                <Route exact path='/' element={<NewLogin/>}/>
+                <Route path='/signup' element={<NewSignUp/>}/>
+                <Route path='/forgot-password' element={<NewForgotPassword/>}/>
+                <Route path='/home' element={<HomePage/>}/>
+                <Route path='/nps' element={<NPSComponent/>}/>
+                <Route path='/search' element={<Home/>}/>
+                <Route path='/explore' element={<Explore/>}/>
+                <Route path='/facility' element={<Facility/>}/>
+                <Route path='/location' element={<LocationPage/>}/>
+                <Route path='/review' element={<ReviewPage/>}/>
+            </Routes>
+        </BrowserRouter>
     </div>
 
   );
