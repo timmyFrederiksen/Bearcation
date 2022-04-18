@@ -1,7 +1,12 @@
 import React, {useCallback, useMemo, useRef, useState} from "react";
 import { useLoadScript, Circle, GoogleMap, Marker} from "@react-google-maps/api";
 import { useNavigate } from "react-router-dom";
-import { BsFillArrowRightCircleFill } from "react-icons/bs";
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import IconButton from '@material-ui/core/IconButton';
+import Multiselect from 'multiselect-react-dropdown';
+import { Slider } from '@mui/material';
+import Button from '@mui/material/Button';
+
 
 import "@reach/combobox/styles.css";
 import '../styles/explore.css'
@@ -11,20 +16,26 @@ const grandCanyon = {
     'name': 'Grand Canyon', 
     'description': 'canyons', 
     'distance': 53.1
-}
-
+};
 
 function PlaceCard(name, description, distance, navigate){
     return(
         <div className="location-card">
-            <h3>{name} {distance} mi</h3>
-            <button>
-                icon=""
-            </button>
+            <div className="location-card-detail">
+                <h3 className="location-card-detail-data">{name} {distance} mi</h3>
+            </div>
+            <div className="location-card-navigate">
+                <IconButton 
+                    className="location-card-navigate-button"  
+                    onClick={e => navigate('/location')}
+                >
+                    <KeyboardArrowRightIcon fontSize="large" />
+                </IconButton>
+            </div>
         </div>
     );
 }
-
+ 
 
 
 function Explore(){
@@ -32,6 +43,8 @@ function Explore(){
     const [vacationLocation, setVacationLocation] = useState();
     const [places, setPlaces] = useState([]);
     const [loadAdvancedSearch, setLoadAdvancedSearch] = useState(false);
+    const [activities, setActivities] = useState([]);
+    const [price, setPrice] = useState(50);
 
     const mapRef = useRef();
     const center = useMemo(
@@ -39,7 +52,6 @@ function Explore(){
         []
     );
     const navigate = useNavigate();
-
 
     const onLoad = useCallback((map) => (mapRef.current = map), [])
     const { isLoaded } = useLoadScript({
@@ -54,6 +66,14 @@ function Explore(){
         //setPlaces(data); data.{}
     };
 
+    const handlePriceChange = (event, newPrice) => {
+        setPrice(newPrice);
+    }
+
+    const parkActivites = [
+        "Camping", "Hiking"
+    ];
+
     if(!isLoaded) return <div>Loading...</div>
     return(
         <div className="explore-body">
@@ -64,11 +84,47 @@ function Explore(){
                         setVacationLocation(position);
                         mapRef.current?.panTo(position);
                     }}/>
-                    <button className="advanced-search" onClick={() => setLoadAdvancedSearch(!loadAdvancedSearch)}>Advanced Search</button>
+                    <div className="advanced-search-button-group">
+                        <Button 
+                            className="advanced-search-button" 
+                            variant="text"
+                            onClick={() => setLoadAdvancedSearch(!loadAdvancedSearch)}
+                        >
+                            Advanced Search
+                        </Button>
+                    </div>
                 </div>
                 {loadAdvancedSearch && (
                     <div className="advanced-search-group">
-                        <h1>Advanced Criteria</h1>
+                        <h3>Advanced Criteria</h3>
+                        <div className="advanced-search-activities-group">
+                            <h4>Activites</h4>
+                            <Multiselect
+                                isObject={false}
+                                onRemove={(event) => {
+                                    setActivities([...event]); 
+                                }}
+                                onSelect={(event) => {
+                                    setActivities([...event]); 
+                                }}
+                                options={parkActivites}
+                            />
+                        </div>
+                        <div className="explore-price-group">
+                            <h4 className="explore-price-label">Price</h4>
+                            <div className="price-slider-group">
+                                <Slider
+                                    className="price-slider"
+                                    value={price}
+                                    min={0}
+                                    step={5}
+                                    max={500}
+                                    onChange={handlePriceChange}
+                                    aria-label="Small"
+                                    valueLabelDisplay="auto"
+                                />
+                            </div>
+                        </div>
                     </div>
                 )}
                 <div className="map-group">
