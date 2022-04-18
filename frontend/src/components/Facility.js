@@ -3,7 +3,7 @@ import { useLoadScript, Circle, GoogleMap, Marker} from "@react-google-maps/api"
 import { useNavigate } from "react-router-dom";
 
 import "@reach/combobox/styles.css";
-import Places from "./Places";
+import Places from "./places";
 import '../styles/facility.css'
 
 

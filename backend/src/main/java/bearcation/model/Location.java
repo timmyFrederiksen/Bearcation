@@ -6,6 +6,8 @@ import lombok.NonNull;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -16,25 +18,28 @@ public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="location_id")
-    private long id;
+    private Long id;
 
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private @NonNull User owner;
+    private User owner;
 
     @OneToMany(mappedBy="location", cascade=CascadeType.ALL)
-    private @NonNull Set<Review> ownedLocations;
+    private Set<Review> ownedLocations;
+
+    private String name;
+    private String address;
+
+    @Column(length = 1000)
+    private String description;
+    private Double price;
+    private Double longitude;
+    private Double latitude;
+
+    @ElementCollection
+    private List<String> activities;
 
 
-    private @NonNull String name;
-    private @NonNull String address;
-    private @NonNull String details;
 
-    public Location(@NonNull User owner, @NonNull String name, @NonNull String address, @NonNull String details) {
-        this.owner = owner;
-        this.name = name;
-        this.address = address;
-        this.details = details;
-    }
 }

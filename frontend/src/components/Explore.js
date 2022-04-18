@@ -5,7 +5,7 @@ import { BsFillArrowRightCircleFill } from "react-icons/bs";
 
 import "@reach/combobox/styles.css";
 import '../styles/explore.css'
-import Places from "./Places";
+import Places from "./places";
 
 const grandCanyon = {
     'name': 'Grand Canyon', 
