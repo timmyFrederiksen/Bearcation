@@ -7,6 +7,8 @@ import Home from "./components/LoadSearch";
 import NewLogin from "./components/NewLogin";
 import Explore from "./components/Explore";
 import NewSignUp from './components/NewSignUp';
+import NewForgotPassword from './components/NewForgotPassword';
+import Facility from './components/Facility';
 
 import './App.css';
 
@@ -16,11 +18,12 @@ function App() {
         <Routes>
             <Route exact path='/' element={<NewLogin/>}/>
             <Route path='/signup' element={<NewSignUp/>}/>
-            <Route path='/forgot-password' element={<ForgotPassword/>}/>
+            <Route path='/forgot-password' element={<NewForgotPassword/>}/>
             <Route path='/home' element={<HomePage/>}/>
             <Route path='/nps' element={<NPSComponent/>}/>
             <Route path='/search' element={<Home/>}/>
             <Route path='/explore' element={<Explore/>}/>
+            <Route path='/facility' element={<Facility/>}/>
         </Routes>
     </div>
 
