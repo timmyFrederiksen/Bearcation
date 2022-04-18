@@ -10,10 +10,10 @@ const signup = async (username, password) => {
 }
 
 
-const handleSubmit = async (e, navigate, username, password) => {
+const handleSubmit = async (e, navigate, firstname, lastname, password) => {
     e.preventDefault();
 
-    const response = await signup(username, password);
+    const response = await signup((firstname + lastname), password);
     if(response != null){
         navigate('/')
     }else{
@@ -23,7 +23,9 @@ const handleSubmit = async (e, navigate, username, password) => {
 
 
 function NewSignUp(){
-    const [username, setUsername] = useState();
+    const [firstname, setFirstname] = useState();
+    const [lastname, setLastname] = useState();
+    const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [confirmPassword, setConfirmPassword] = useState();
 
@@ -33,9 +35,13 @@ function NewSignUp(){
         <div className="signup-page">
             <div className="signup-body">
                 <h2 className="create-tag">Create your Bearcation Account</h2>
-                <form className = "signup-form" onSubmit={e => handleSubmit(e, navigate, username, password)} >
-                    <div className="username-group form-group">
-                        <input name = "username" className="form-control" placeholder="Username" value={username} type="text" onChange={e => setUsername(e.target.value)} required />
+                <form className = "signup-form" onSubmit={e => handleSubmit(e, navigate, firstname, lastname, password)} >
+                    <div className="signup-username-group form-group">
+                        <input name = "firstname" className="form-control first-name-text" placeholder="First Name" value={firstname} type="text" onChange={e => setFirstname(e.target.value)} required />
+                        <input name = "lastname" className="form-control last-name-text" placeholder="Last Name" value={lastname} type="text" onChange={e => setLastname(e.target.value)} required />
+                    </div>
+                    <div className="email-group form-group">
+                        <input name = "email" className="form-control signup-email-text" placeholder="Email" value={email} type="text" onChange={e => setEmail(e.target.value)} required />
                     </div>
                     <div className="password-group form-group">
                         <input name = "password" className="form-control" placeholder="Password" value={password} type="password" onChange={e => setPassword(e.target.value)} required />

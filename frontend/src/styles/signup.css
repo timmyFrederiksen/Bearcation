@@ -32,8 +32,21 @@ a:hover {
     padding-bottom: 25px;
 }
 
-.username-group {
+.signup-username-group {
     padding-top: 20px;
+    padding-bottom: 25px;
+}
+
+.first-name-text{
+    margin-right: 5%;
+}
+.first-name-text, .last-name-text {
+    align-items: left;
+    display: inline;
+    width: 45%;
+}
+
+.email-group {
     padding-bottom: 25px;
     padding-left: 10px;
     padding-right: 10px;

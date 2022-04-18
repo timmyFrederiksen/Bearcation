@@ -1,18 +1,8 @@
 import React, {useCallback, useMemo, useRef, useState} from "react";
 import { useLoadScript, Circle, GoogleMap, Marker} from "@react-google-maps/api";
 import { useNavigate } from "react-router-dom";
+import { BsFillArrowRightCircleFill } from "react-icons/bs";
 
-import usePlacesAutocomplete, {
-    getGeocode,
-    getLatLng,
-} from 'use-places-autocomplete';
-import {
-    Combobox,
-    ComboboxInput,
-    ComboboxPopover,
-    ComboboxList,
-    ComboboxOption,
-} from "@reach/combobox";
 import "@reach/combobox/styles.css";
 import '../styles/explore.css'
 import Places from "./Places";
@@ -24,10 +14,13 @@ const grandCanyon = {
 }
 
 
-function PlaceCard(name, description, distance){
+function PlaceCard(name, description, distance, navigate){
     return(
         <div className="location-card">
             <h3>{name} {distance} mi</h3>
+            <button>
+                icon=""
+            </button>
         </div>
     );
 }
@@ -38,12 +31,14 @@ function Explore(){
 
     const [vacationLocation, setVacationLocation] = useState();
     const [places, setPlaces] = useState([]);
+    const [loadAdvancedSearch, setLoadAdvancedSearch] = useState(false);
 
     const mapRef = useRef();
     const center = useMemo(
         () => ({ lat: 31.5489, lng: -97.1131 }),
         []
     );
+    const navigate = useNavigate();
 
 
     const onLoad = useCallback((map) => (mapRef.current = map), [])
@@ -69,8 +64,13 @@ function Explore(){
                         setVacationLocation(position);
                         mapRef.current?.panTo(position);
                     }}/>
-                    <button className="advanced-search">Advanced Search</button>
+                    <button className="advanced-search" onClick={() => setLoadAdvancedSearch(!loadAdvancedSearch)}>Advanced Search</button>
                 </div>
+                {loadAdvancedSearch && (
+                    <div className="advanced-search-group">
+                        <h1>Advanced Criteria</h1>
+                    </div>
+                )}
                 <div className="map-group">
                     <GoogleMap
                         zoom={10}
@@ -99,7 +99,7 @@ function Explore(){
                         {/* {places.map((place) => (
                             <PlaceCard place={place} />
                         ))} */}
-                        {PlaceCard(grandCanyon.name, grandCanyon.description, grandCanyon.distance)}
+                        {PlaceCard(grandCanyon.name, grandCanyon.description, grandCanyon.distance, navigate)}
                     </div>
                 </div>
             </div>

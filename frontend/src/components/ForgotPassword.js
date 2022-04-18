@@ -64,7 +64,6 @@ class ForgotPassword extends React.Component {
                         <label>Username:</label>
                         <input
                             name="username"
-                            className="form-control"
                             value={this.state.username}
                             type="text"
                             onChange={this.handleInputChange}
