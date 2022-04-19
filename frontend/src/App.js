@@ -13,6 +13,7 @@ import NewForgotPassword from './components/NewForgotPassword';
 import Facility from './components/Facility';
 import LocationPage from './components/LocationPage';
 import ReviewPage from './components/ReviewPage';
+import HeaderBar from './components/HeaderBar';
 
 function App() {
     return (
@@ -29,6 +30,7 @@ function App() {
                 <Route path='/facility' element={<Facility/>}/>
                 <Route path='/location' element={<LocationPage/>}/>
                 <Route path='/review' element={<ReviewPage/>}/>
+                <Route path='/header-bar' element={<HeaderBar/>}/>
             </Routes>
         </BrowserRouter>
     </div>
