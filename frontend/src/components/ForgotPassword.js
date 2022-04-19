@@ -2,6 +2,7 @@ import React from "react";
 import UserService from "../services/UserService";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import HeaderBar from "./HeaderBar";
 
 class ForgotPassword extends React.Component {
     accounts = [];
