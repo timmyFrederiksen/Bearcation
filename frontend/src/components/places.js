@@ -37,7 +37,7 @@ export default function Places({setVacationLocation}) {
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
                 disabled={!ready}
-                className="combobox-input"
+                classNames="combobox-input"
                 placeholder="Search for Location..."
             />
             <ComboboxPopover>

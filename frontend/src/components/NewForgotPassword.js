@@ -35,7 +35,6 @@ function NewForgotPassword(){
     const navigate = useNavigate();
     return (
         <div className="forgot-password-page">
-            <HeaderBar/>
             <div className="forgot-password-body">
                 <h2 className="forgot-password-tag">Forgot Password</h2>
                 <form className = "forgot-password-form" onSubmit={e => handleSubmit(e, navigate, username)} >

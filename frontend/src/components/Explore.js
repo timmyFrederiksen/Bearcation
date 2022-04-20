@@ -11,7 +11,7 @@ import HeaderBar from "./HeaderBar";
 
 import "@reach/combobox/styles.css";
 import '../styles/explore.css'
-import Places from "./places";
+import Places from "./Places";
 
 const grandCanyon = {
     'name': 'Grand Canyon',

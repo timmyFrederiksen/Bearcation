@@ -1,4 +1,8 @@
 import React, { useState} from "react";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import { useNavigate, Link } from "react-router-dom"
 
 import axios from 'axios';
@@ -28,6 +32,11 @@ function NewSignUp(){
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [confirmPassword, setConfirmPassword] = useState();
+    const [role, setRole] = useState('');
+
+    const handleChange = (event) => {
+        setRole(event.target.value);
+    };
 
     const navigate = useNavigate();
 
@@ -48,6 +57,21 @@ function NewSignUp(){
                     </div>
                     <div className="confirm-password-group form-group">
                         <input name = "confirm-password" className="form-control" placeholder="Confirm Password" value={confirmPassword} type="password" onChange={e => setConfirmPassword(e.target.value)} required />
+                    </div>
+                    <div className="signup-role-container">
+                        <FormControl size="small" className="signup-role-form">
+                            <InputLabel id="demo-simple-select-label">Role</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                value={role}
+                                label="Role"
+                                onChange={handleChange}
+                                required
+                            >
+                                <MenuItem value="Customer">Customer</MenuItem>
+                                <MenuItem value="Owner">Owner</MenuItem>
+                            </Select>
+                        </FormControl>
                     </div>
                     <input type="submit" className="btn btn-dark btn-block submit" value="Submit" />
                 </form>
