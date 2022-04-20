@@ -26,7 +26,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(value = BearcationController.class)
 //@WithMockUser (not working, going to try without this)
 public class UserTests {
 

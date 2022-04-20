@@ -10,22 +10,20 @@ import axios from 'axios';
 import '../styles/login.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 
-const handleSubmit = async (e, navigate, username, password) => {
+ const handleSubmit = async(e, navigate, email, password) => {
     e.preventDefault();
-    const userDto = {
-        username: username,
+    const loginDto = {
+        email: email,
         password: password
     };
-    let response;
-    await axios.post("http://localhost:80/user/check", userDto)
-        .then(res => {
-            console.log(res);
-            response = res.data;
-            //response = res.data.username;
-        })
+     let response;
+    await axios.post("http://localhost:80/account/login", loginDto)
+     .then(res => {
+         console.log(res);
+         response = res.data;
+     })
 
-    console.log("response " + response)
-    if (response !== "") {
+    if(response !== ""){
         navigate('/home')
     } else {
         alert("Credentials do not match any account.")
@@ -53,7 +51,7 @@ function NewLogin() {
                 <h2 className="welcome-tag">Welcome to Bearcation</h2>
                 <form className="login-form" onSubmit={e => handleSubmit(e, navigate, username, password)} >
                     <div className="username-group form-group">
-                        <input name="username" className="form-control" placeholder="Username" value={username} type="text" onChange={e => setUsername(e.target.value)} required />
+                        <input name = "username" className="form-control" placeholder="Email" value={username} type="text" onChange={e => setUsername(e.target.value)} required />
                     </div>
                     <div className="password-group form-group">
                         <input name="password" className="form-control" placeholder="Password" value={password} type="password" onChange={e => setPassword(e.target.value)} required />
