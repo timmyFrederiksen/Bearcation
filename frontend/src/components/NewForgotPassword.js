@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom"
 import axios from 'axios';
 import '../styles/forgotPassword.css'
 import "bootstrap/dist/css/bootstrap.min.css"
+import HeaderBar from "./HeaderBar";
 
  const handleSubmit = async(e, navigate, username) => {
     e.preventDefault();
@@ -34,6 +35,7 @@ function NewForgotPassword(){
     const navigate = useNavigate();
     return (
         <div className="forgot-password-page">
+            <HeaderBar/>
             <div className="forgot-password-body">
                 <h2 className="forgot-password-tag">Forgot Password</h2>
                 <form className = "forgot-password-form" onSubmit={e => handleSubmit(e, navigate, username)} >
