@@ -11,7 +11,7 @@ import HeaderBar from "./HeaderBar";
 
 import "@reach/combobox/styles.css";
 import '../styles/explore.css'
-import Places from "./Places";
+import NewPlaces from "./NewPlaces";
 
 const grandCanyon = {
     'name': 'Grand Canyon',
@@ -83,7 +83,7 @@ function Explore() {
                 <h1>Explore Parks</h1>
                 <div className="search-form">
                     <div className="search-group form-group">
-                        <Places className="search-text" setVacationLocation={(position) => {
+                        <NewPlaces className="search-text" setVacationLocation={(position) => {
                             setVacationLocation(position);
                             mapRef.current?.panTo(position);
                         }} />

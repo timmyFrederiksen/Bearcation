@@ -3,10 +3,8 @@ import { useLoadScript, Circle, GoogleMap, Marker} from "@react-google-maps/api"
 import { useNavigate } from "react-router-dom";
 
 import "@reach/combobox/styles.css";
-import Places from "./Places";
+import NewPlaces from "./NewPlaces";
 import '../styles/facility.css'
-
-
 
 
 function Facility(){
