@@ -49,7 +49,8 @@ public class ReviewDTO {
                     l.getLatitude(),
                     l.getLongitude(),
                     null,
-                    null
+                    null,
+                    l.getActivities()
             );
         }
     }

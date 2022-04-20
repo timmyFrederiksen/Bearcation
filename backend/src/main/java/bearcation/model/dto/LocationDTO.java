@@ -24,7 +24,8 @@ public class LocationDTO {
     // private String nationalParkId;
     private UserDTO owner;
     private Set<ReviewDTO> reviews;
-//    private List<String> activities;
+
+    private Set<String> activities;
 
     public LocationDTO(Location location) {
         if (location == null) {
@@ -37,6 +38,7 @@ public class LocationDTO {
         price = location.getPrice();
         latitude = location.getLatitude();
         longitude = location.getLongitude();
+        activities = location.getActivities();
         owner = null;
         reviews = null;
         if (location.getReviews() != null) {
@@ -54,6 +56,6 @@ public class LocationDTO {
     public Location toLocation(){
         Set<Review> reviews = this.reviews != null ? this.reviews.stream().map(ReviewDTO::toReview).collect(Collectors.toSet()) : null;
         User owner = this.owner != null ? this.owner.toUser() : null;
-        return new Location(id, owner, name, address, description, price, latitude, longitude, reviews);
+        return new Location(id, owner, name, address, description, price, latitude, longitude, reviews, activities);
     }
 }

@@ -30,6 +30,9 @@ public class Location {
     @OneToMany(mappedBy="location", cascade=CascadeType.ALL)
     private Set<Review> reviews;
 
+    @ElementCollection
+    private Set<String> activities;
+
     public Location(User owner, String name, String address, String description, Double price, Double latitude, Double longitude) {
         this.owner = owner;
         this.name = name;

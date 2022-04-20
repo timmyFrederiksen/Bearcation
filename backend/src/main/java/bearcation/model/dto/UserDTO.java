@@ -43,7 +43,8 @@ public class UserDTO {
                             l.getLatitude(),
                             l.getLongitude(),
                             null,
-                            null
+                            null,
+                            l.getActivities()
                     )).collect(Collectors.toSet());
         }
         postedReviews = null;
