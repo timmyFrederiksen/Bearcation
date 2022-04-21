@@ -1,3 +1,14 @@
+
+.customer-dashboard-body {
+    text-align: left;
+    justify-content: left;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+
 .customer-dashboard-recommended-parks{
     height: 20%;
     margin-top: 3%;
@@ -8,11 +19,12 @@
 }
 
 .customer-dashboard-park-card {
-    display: inline-block;
     border: 0.5px solid #000000;
     border-radius: 25px;
     padding: 20px;
     margin-top: 1%;
+    display: flex;
+    align-items: center;
 }
 .customer-dashboard-explore-text {
     margin-top: 3%;
@@ -23,17 +35,9 @@
     text-decoration: underline;
 }
 
+
 .customer-dashboard-parks {
     padding-top: 5%;
-}
-
-.customer-dashboard-body {
-    text-align: left;
-    justify-content: left;
-    margin-top: 5%;
-    margin-bottom: 5%;
-    margin-left: 10%;
-    margin-right: 10%;
 }
 
 

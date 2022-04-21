@@ -14,6 +14,7 @@ import LocationPage from './components/LocationPage';
 import ReviewPage from './components/ReviewPage';
 import HeaderBar from './components/HeaderBar';
 import CustomerDashboard from './components/CustomerDashboard';
+import OwnerDashboard from './components/OwnerDashboard';
 
 function App() {
     return (
@@ -31,6 +32,7 @@ function App() {
                 <Route path='/review' element={<ReviewPage/>}/>
                 <Route path='/header-bar' element={<HeaderBar/>}/>
                 <Route path='/customer-dashboard' element={<CustomerDashboard/>}/>
+                <Route path='/owner-dashboard' element={<OwnerDashboard/>}/>
             </Routes>
         </BrowserRouter>
     </div>
