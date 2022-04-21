@@ -3,6 +3,8 @@ package bearcation.model.requests;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.Set;
+
 @Data
 @AllArgsConstructor
 public class CreateLocationRequest {
@@ -13,4 +15,5 @@ public class CreateLocationRequest {
     private Double price;
     private Double latitude;
     private Double longitude;
+    private Set<String> activities;
 }
