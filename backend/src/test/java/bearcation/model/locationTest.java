@@ -166,4 +166,25 @@ class LocationMethodTests {
 
         assertEquals(loc1.findAvgScore(), 2.5, 0.01);
     }
+
+    @Test
+    @DisplayName("Test Price points")
+    public void testPricePoints() {
+        Location loc1 = new Location();
+        loc1.setId((long)456);
+        loc1.setName("here");
+        loc1.setDescription("there");
+        loc1.setLongitude(179.0);
+        loc1.setLatitude(0.0);
+        loc1.setPrice(0.0);
+
+        assertEquals(loc1.givePricePoints(0.0), 50);
+
+        loc1.setPrice(100.0);
+
+        assertEquals(loc1.givePricePoints(0.0), 0);
+        assertEquals(loc1.givePricePoints(40.0), 5);
+        assertEquals(loc1.givePricePoints(60.0), 25);
+        assertEquals(loc1.givePricePoints(200.0), 50);
+    }
 }
