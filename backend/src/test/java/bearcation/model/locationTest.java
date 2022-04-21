@@ -36,10 +36,4 @@ public class locationTest {
         assertEquals(Optional.ofNullable((location)), repository.findById(123));
         assertEquals(location, server.getLocationById(123));
     }
-
-
-
-
-
-
 }
