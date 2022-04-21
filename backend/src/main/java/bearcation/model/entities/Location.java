@@ -120,6 +120,8 @@ public class Location {
                 return 5;
             }
         }
+
+        return 0;
     }
 
 }
