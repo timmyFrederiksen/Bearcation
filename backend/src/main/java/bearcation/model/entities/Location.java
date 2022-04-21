@@ -124,4 +124,25 @@ public class Location {
         return 0;
     }
 
+    public int giveDistancePoints(double distance) {
+        // Scoring scheme:
+        // 0-50 miles -> 100 points
+        // 50-250 miles -> 50 points
+        // 250-750 -> 25 points
+        // 750-1500 -> 10 points
+        // 1500+ -> 0 points
+
+        if (distance < 50.0) {
+            return 100;
+        } else if (distance < 250.0) {
+            return 50;
+        } else if (distance < 750) {
+            return 25;
+        } else if (distance < 1500) {
+            return 10;
+        } else {
+            return 0;
+        }
+    }
+
 }
