@@ -12,7 +12,9 @@ import org.mockito.Mockito;
 import org.mockito.Mockito.*;
 import org.junit.Test;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -44,58 +46,51 @@ public class locationTest {
     @Test
     @DisplayName("Test average rating")
     public void testAvgRating() {
-        Location loc1 = new Location();
-        loc1.setId((long)456);
-        loc1.setName("here");
-        loc1.setDescription("there");
-        loc1.setLongitude(179.0);
-        loc1.setLatitude(0.0);
-        loc1.setPrice(0.0);
 
         User u = new User();
-        Review r1 = new Review(5.0, "place 1", u, loc1);
-        Review r2 = new Review(4.0, "place 2", u, loc1);
-        Review r3 = new Review(3.0, "place 3", u, loc1);
-        Review r4 = new Review(2.0, "place 4", u, loc1);
-        Review r5 = new Review(1.0, "place 5", u, loc1);
+        Review r1 = new Review(5.0, "place 1", u, location);
+        Review r2 = new Review(4.0, "place 2", u, location);
+        Review r3 = new Review(3.0, "place 3", u, location);
+        Review r4 = new Review(2.0, "place 4", u, location);
+        Review r5 = new Review(1.0, "place 5", u, location);
 
-        assertEquals(loc1.findAvgRating(), 3.0, 0.01);
+        assertEquals(location.findAvgRating(), 3.0, 0.01);
     }
 
     @Test
     @DisplayName("Test Default avg rating")
     public void testDefaultAvgRating() {
-        Location loc1 = new Location();
-        loc1.setId((long)456);
-        loc1.setName("here");
-        loc1.setDescription("there");
-        loc1.setLongitude(179.0);
-        loc1.setLatitude(0.0);
-        loc1.setPrice(0.0);
 
-        User u = new User();
-
-        assertEquals(loc1.findAvgRating(), 2.5, 0.01);
+        assertEquals(location.findAvgRating(), 2.5, 0.01);
     }
 
     @Test
     @DisplayName("Test Price points")
     public void testPricePoints() {
-        Location loc1 = new Location();
-        loc1.setId((long)456);
-        loc1.setName("here");
-        loc1.setDescription("there");
-        loc1.setLongitude(179.0);
-        loc1.setLatitude(0.0);
-        loc1.setPrice(0.0);
+        location.setPrice(0.0);
 
-        assertEquals(loc1.givePricePoints(0.0), 50);
+        assertEquals(location.givePricePoints(0.0), 50);
 
-        loc1.setPrice(100.0);
+        location.setPrice(100.0);
 
-        assertEquals(loc1.givePricePoints(0.0), 0);
-        assertEquals(loc1.givePricePoints(40.0), 5);
-        assertEquals(loc1.givePricePoints(60.0), 25);
-        assertEquals(loc1.givePricePoints(200.0), 50);
+        assertEquals(location.givePricePoints(0.0), 0);
+        assertEquals(location.givePricePoints(40.0), 5);
+        assertEquals(location.givePricePoints(60.0), 25);
+        assertEquals(location.givePricePoints(200.0), 50);
+    }
+
+    @Test
+    @DisplayName("Test Raw Activity")
+    public void testRawActivityScore() {
+        Set<String> s = new HashSet<String>();
+        s.add("1");
+        s.add("2");
+        s.add("3");
+        s.add("4");
+        s.add("5");
+        s.add("6");
+        location.setActivities(s);
+
+        assertEquals(12, location.giveRawActivityPoints());
     }
 }
