@@ -11,8 +11,7 @@ import bearcation.utils.MathUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -28,14 +27,18 @@ public class LocationService {
     }
 
     public LocationDTO createLocation(CreateLocationRequest createLocationRequest) {
-        User owner = userRepository.getById(createLocationRequest.getOwnerId());
+        /*User owner = userRepository.getById(createLocationRequest.getOwnerId());
         Location location = new Location( owner,
                 createLocationRequest.getName(),
                 createLocationRequest.getAddress(),
                 createLocationRequest.getDescription(),
                 createLocationRequest.getPrice(),
                 createLocationRequest.getLatitude(),
-                createLocationRequest.getLongitude());
+                createLocationRequest.getLongitude());*/
+        Location location = new Location(
+                createLocationRequest.getName(),
+                createLocationRequest.getDescription(),
+                createLocationRequest.getActivities());
         return new LocationDTO(locationRepository.save(location));
     }
 
@@ -47,13 +50,13 @@ public class LocationService {
         return this.locationRepository.findAll().stream().map(LocationDTO::new).collect(Collectors.toList());
     }
 
-    public List<LocationDTO> getRecommendedLocations(Double latitude, Double longitude, Double price, Activity[] activities) {
+    public List<LocationDTO> getRecommendedLocations(Double latitude, Double longitude, Double price, Set<String> activities) {
         List<Location> locations = locationRepository.findAll();
-        locations.sort(Comparator.comparingInt(a -> calculateScore(a, latitude, longitude)));
+        locations.sort(Comparator.comparingInt(a -> calculateScore(a, latitude, longitude, price, activities)));
         return locations.stream().map(LocationDTO::new).limit(10).collect(Collectors.toList());
     }
 
-    Integer calculateScore(Location location, Double latitude, Double longitude){
+    Integer calculateScore(Location location, Double latitude, Double longitude, Double price, Set<String> activities){
         double distance = MathUtils.calculateDistance(latitude, longitude, location.getLatitude(), location.getLongitude());
         Double cost = location.getPrice();
 
@@ -77,5 +80,13 @@ public class LocationService {
         }
 
         return score;
+    }
+
+    public Set<String> findAllActivities() {
+        return this.locationRepository.findAll().stream().map(Location::getActivities).flatMap(Collection::stream).collect(Collectors.toSet());
+    }
+
+    public LocationDTO findLocationByName(String name) {
+        return this.locationRepository.findLocationByName(name).map(LocationDTO::new).orElse(null);
     }
 }
