@@ -45,7 +45,7 @@ public class locationTest {
     @DisplayName("Test average rating")
     public void testAvgRating() {
         Location loc1 = new Location();
-        loc1.setId((long) 456);
+        loc1.setId((long)456);
         loc1.setName("here");
         loc1.setDescription("there");
         loc1.setLongitude(179.0);
@@ -66,7 +66,7 @@ public class locationTest {
     @DisplayName("Test Default avg rating")
     public void testDefaultAvgRating() {
         Location loc1 = new Location();
-        loc1.setId((long) 456);
+        loc1.setId((long)456);
         loc1.setName("here");
         loc1.setDescription("there");
         loc1.setLongitude(179.0);
@@ -82,7 +82,7 @@ public class locationTest {
     @DisplayName("Test Price points")
     public void testPricePoints() {
         Location loc1 = new Location();
-        loc1.setId((long) 456);
+        loc1.setId((long)456);
         loc1.setName("here");
         loc1.setDescription("there");
         loc1.setLongitude(179.0);
