@@ -1,3 +1,4 @@
+
 import React, { useState} from "react";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -18,19 +19,19 @@ const signup = async (emailArg, passwordArg, firstnameArg, lastnameArg) => {
     };
     let response;
     await axios.post("http://localhost:80/account/createAccount", signUpDto)
-     .then(res => {
-         console.log(res);
-         response = res.data;
-    })
+        .then(res => {
+            console.log(res);
+            response = res.data;
+        })
     return response;
 }
 
 
 const handleSubmit = async (e, navigate, email, password, firstname, lastname) => {
     e.preventDefault();
-    
+
     const response = await signup(email, password, firstname, lastname);
-    if(response != ""){
+    if(response !== ""){
         navigate('/')
     }else{
         alert("Credentials do not match any account.")

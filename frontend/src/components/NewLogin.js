@@ -10,21 +10,21 @@ import axios from 'axios';
 import '../styles/login.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 
- const handleSubmit = async(e, navigate, email, password) => {
+const handleSubmit = async(e, navigate, email, password) => {
     e.preventDefault();
     const loginDto = {
         email: email,
         password: password
     };
-     let response;
+    let response;
     await axios.post("http://localhost:80/account/login", loginDto)
-     .then(res => {
-         console.log(res);
-         response = res.data;
-     })
+        .then(res => {
+            console.log(res);
+            response = res.data;
+        })
 
     if(response !== ""){
-        navigate('/home')
+        navigate('/customer-dashboard', { state:{fName: response.firstName}})
     } else {
         alert("Credentials do not match any account.")
     }
@@ -68,14 +68,14 @@ function NewLogin() {
                                 PaperProps={{
                                     elevation: 0,
                                     sx: {
-                                      overflow: 'visible',
-                                      filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                                      mt: 1.5,
-                                      '&.MuiMenuItem-root': {
-                                        display: 'flex'
-                                      },
+                                        overflow: 'visible',
+                                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                                        mt: 1.5,
+                                        '&.MuiMenuItem-root': {
+                                            display: 'flex'
+                                        },
                                     },
-                                  }}
+                                }}
                             >
                                 <MenuItem value="Customer">Customer</MenuItem>
                                 <MenuItem value="Owner">Owner</MenuItem>
