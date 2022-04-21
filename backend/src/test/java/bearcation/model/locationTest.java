@@ -4,6 +4,8 @@ import bearcation.model.Location;
 import bearcation.repository.LocationRepository;
 import bearcation.service.LocationService;
 import org.junit.Before;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mockito;
 import org.mockito.Mockito.*;
 import org.junit.Test;
@@ -27,6 +29,7 @@ public class locationTest {
         location.setLongitude(88.8);
         location.setLongitude(99.9);
         location.setPrice(100.0);
+        location.setOwner(new User());
     }
 
     @Test
@@ -37,9 +40,8 @@ public class locationTest {
         assertEquals(location, server.getLocationById(123));
     }
 
-
-
-
-
-
+    @Test
+    public void testCreateLocation(){
+        assertEquals(location, server.createLocation(location));
+    }
 }

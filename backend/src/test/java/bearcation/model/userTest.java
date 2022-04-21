@@ -42,4 +42,5 @@ public class userTest {
         when(repository.findByUsernameAndPassword(user.getUsername(), user.getPassword())).thenReturn(Optional.ofNullable(user));
         assertEquals(user, service.userByUsernameAndPassword(user));
     }
+
 }
