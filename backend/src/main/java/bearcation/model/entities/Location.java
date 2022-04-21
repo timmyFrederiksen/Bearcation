@@ -1,5 +1,6 @@
 package bearcation.model.entities;
 
+import bearcation.utils.MathUtils;
 import lombok.*;
 
 import javax.persistence.*;
@@ -51,7 +52,9 @@ public class Location {
         int score = 0;
 
         // Location Component (100 points)
-        score += giveDistancePoints(calculateDistance(targetLocation));
+        score += giveDistancePoints(MathUtils.calculateDistance(
+                this.getLatitude(), this.getLatitude(), targetLocation.getLatitude(),
+                targetLocation.getLongitude()));
 
         // Availability Component (50 points)
         score += 50;
@@ -73,29 +76,6 @@ public class Location {
         }
 
         return score;
-    }
-
-    public double calculateDistance(Location that) {
-
-        // Convert to radian angle measures
-        double lon1 = Math.toRadians(this.getLongitude());
-        double lon2 = Math.toRadians(that.getLongitude());
-        double lat1 = Math.toRadians(this.getLatitude());
-        double lat2 = Math.toRadians(that.getLatitude());
-
-        // Find difference
-        double diff_longitudes = lon2 - lon1;
-        double diff_latitudes = lat2 - lat1;
-        double a = Math.pow(Math.sin(diff_latitudes / 2), 2)
-                + Math.cos(lat1) * Math.cos(lat2)
-                * Math.pow(Math.sin(diff_longitudes / 2),2);
-        double c = 2 * Math.asin(Math.sqrt(a));
-
-        // Earth's radius in km
-        double r = 6371;
-
-        // Return the calculated result
-        return c * r;
     }
 
     public double findAvgRating() {
