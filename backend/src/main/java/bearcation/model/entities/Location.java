@@ -164,4 +164,11 @@ public class Location {
         }
     }
 
+    public int giveRawActivityPoints() {
+        // Scoring scheme:
+        // If <25 activities, activities * 2
+        // Else 50 ( max score )
+        return (this.getActivities().size() > 25) ? 50 : (this.getActivities().size() * 2);
+    }
+
 }
