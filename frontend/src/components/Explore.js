@@ -28,7 +28,7 @@ function PlaceCard(name, description, distance, navigate) {
             <div className="location-card-navigate">
                 <IconButton
                     className="location-card-navigate-button"
-                    onClick={e => navigate('/location')}
+                    onClick={() => navigate('/location')}
                 >
                     <KeyboardArrowRightIcon fontSize="large" />
                 </IconButton>
