@@ -34,6 +34,7 @@ public class Location {
     private Set<String> activities;
 
     // This is the default value for rating score (no ratings), change if you have an opinion
+    // Change must be reflected in Location Unit tests -> default avg rating
     private final static double RATING_DEFAULT = 2.5;
 
     public Location(User owner, String name, String address, String description, Double price, Double latitude, Double longitude) {

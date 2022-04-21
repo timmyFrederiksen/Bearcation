@@ -2,6 +2,8 @@ package bearcation.model;
 
 import bearcation.model.Location;
 import bearcation.model.entities.Location;
+import bearcation.model.entities.Review;
+import bearcation.model.entities.User;
 import bearcation.repository.LocationRepository;
 import bearcation.service.LocationService;
 import org.junit.Before;
@@ -43,6 +45,8 @@ public class locationTest {
 }
 
 class LocationMethodTests {
+
+    // Checks normal process
     @Test
     @DisplayName("Test Calculate Distance Method 1")
     public void testCalcDistance1() {
@@ -70,6 +74,7 @@ class LocationMethodTests {
         assertEquals(testVal, expectedValue, expectedValue / 100);
     }
 
+    // Checks equality
     @Test
     @DisplayName("Test Calculate Distance Method 2")
     public void testCalcDistance2() {
@@ -97,6 +102,7 @@ class LocationMethodTests {
         assertEquals(testVal, expectedValue, expectedValue / 100);
     }
 
+    // Checks for wrap around on the globe
     @Test
     @DisplayName("Test Calculate Distance Method 3")
     public void testCalcDistance3() {
@@ -122,5 +128,42 @@ class LocationMethodTests {
 
         // Make sure we are right within 1% of the expected value
         assertEquals(testVal, expectedValue, expectedValue / 100);
+    }
+
+    @Test
+    @DisplayName("Test average rating")
+    public void testAvgRating() {
+        Location loc1 = new Location();
+        loc1.setId((long)456);
+        loc1.setName("here");
+        loc1.setDescription("there");
+        loc1.setLongitude(179.0);
+        loc1.setLatitude(0.0);
+        loc1.setPrice(0.0);
+
+        User u = new User();
+        Review r1 = new Review(5.0, "place 1", u, loc1);
+        Review r2 = new Review(4.0, "place 2", u, loc1);
+        Review r3 = new Review(3.0, "place 3", u, loc1);
+        Review r4 = new Review(2.0, "place 4", u, loc1);
+        Review r5 = new Review(1.0, "place 5", u, loc1);
+
+        assertEquals(loc1.findAvgScore(), 3.0, 0.01);
+    }
+
+    @Test
+    @DisplayName("Test Default avg rating")
+    public void testDefaultAvgRating() {
+        Location loc1 = new Location();
+        loc1.setId((long)456);
+        loc1.setName("here");
+        loc1.setDescription("there");
+        loc1.setLongitude(179.0);
+        loc1.setLatitude(0.0);
+        loc1.setPrice(0.0);
+
+        User u = new User();
+
+        assertEquals(loc1.findAvgScore(), 2.5, 0.01);
     }
 }
