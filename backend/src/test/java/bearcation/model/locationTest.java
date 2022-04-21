@@ -96,4 +96,31 @@ class LocationMethodTests {
         // Make sure we are right within 1% of the expected value
         assertEquals(testVal, expectedValue, expectedValue / 100);
     }
+
+    @Test
+    @DisplayName("Test Calculate Distance Method 3")
+    public void testCalcDistance3() {
+        // Set up
+        Location loc1 = new Location();
+        loc1.setId((long)456);
+        loc1.setName("here");
+        loc1.setDescription("there");
+        loc1.setLongitude(179.0);
+        loc1.setLatitude(0.0);
+        loc1.setPrice(0.0);
+        Location loc2 = new Location();
+        loc2.setId((long)123);
+        loc2.setName("park");
+        loc2.setDescription("very good");
+        loc2.setLongitude(-179.0);
+        loc2.setLatitude(0.0);
+        loc2.setPrice(100.0);
+
+        // Test calculate
+        double testVal = loc1.calculateDistance(loc2);
+        double expectedValue = 222.0;
+
+        // Make sure we are right within 1% of the expected value
+        assertEquals(testVal, expectedValue, expectedValue / 100);
+    }
 }
