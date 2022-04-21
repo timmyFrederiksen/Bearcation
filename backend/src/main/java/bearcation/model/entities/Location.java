@@ -62,7 +62,16 @@ public class Location {
         // Pricing Component (50 points)
         score += givePricePoints(targetPrice);
 
-        // Activity and Activity Components left
+        // Raw Activity Component (50 points)
+        score += giveRawActivityPoints();
+
+        // Target Activity Component (10 points / activity match, no max)
+        for (String activity : targetActivites) {
+            if (this.hasActivity(activity)) {
+                score += 10;
+            }
+        }
+
         return score;
     }
 
