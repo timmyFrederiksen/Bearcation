@@ -88,4 +88,38 @@ public class Location {
         return avgScore;
     }
 
+    public boolean hasActivity(String activity) {
+        return this.activities.contains(activity);
+    }
+
+    public int givePricePoints(double targetPrice) {
+        //          Scheme
+        // Default
+        // Less than 	$1 -> 50 points
+        //              $2-$20 -> 25 points
+        //              $21-$50 -> 5 points
+
+        // User enters non-zero preferred_cost:
+        //		Within  preferred_cost -> 50 points
+        //		Within  preferred_cost * 2 -> 25 points
+        //		Within  preferred_cost * 3 -> 5 points
+        if (targetPrice == 0.0) {
+            if (this.getPrice() <= 1.0) {
+                return 50;
+            } else if (this.getPrice() <= 20.0) {
+                return 25;
+            } else if (this.getPrice() <= 50.0) {
+                return 5;
+            }
+        } else {
+            if (this.getPrice() <= targetPrice) {
+                return 50;
+            } else if (this.getPrice() <= (2.0 * targetPrice)) {
+                return 25;
+            } else if (this.getPrice() <= (3.0 * targetPrice)) {
+                return 5;
+            }
+        }
+    }
+
 }
