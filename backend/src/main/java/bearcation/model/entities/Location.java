@@ -47,6 +47,25 @@ public class Location {
         this.longitude = longitude;
     }
 
+    public int calcRecommendationScore(Location targetLocation, double targetPrice, Set<String> targetActivites) {
+        int score = 0;
+
+        // Location Component (100 points)
+        score += giveDistancePoints(calculateDistance(targetLocation));
+
+        // Availability Component (50 points)
+        score += 50;
+
+        // Rating Component (50 points)
+        score += (int)(this.findAvgRating() / 5.0) * 50;
+
+        // Pricing Component (50 points)
+        score += givePricePoints(targetPrice);
+
+        // Activity and Activity Components left
+        return score;
+    }
+
     public double calculateDistance(Location that) {
 
         // Convert to radian angle measures
@@ -70,7 +89,7 @@ public class Location {
         return c * r;
     }
 
-    public double findAvgScore() {
+    public double findAvgRating() {
         if (this.getReviews().size() == 0) {
             return RATING_DEFAULT;
         }

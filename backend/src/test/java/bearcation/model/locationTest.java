@@ -148,7 +148,7 @@ class LocationMethodTests {
         Review r4 = new Review(2.0, "place 4", u, loc1);
         Review r5 = new Review(1.0, "place 5", u, loc1);
 
-        assertEquals(loc1.findAvgScore(), 3.0, 0.01);
+        assertEquals(loc1.findAvgRating(), 3.0, 0.01);
     }
 
     @Test
@@ -164,7 +164,7 @@ class LocationMethodTests {
 
         User u = new User();
 
-        assertEquals(loc1.findAvgScore(), 2.5, 0.01);
+        assertEquals(loc1.findAvgRating(), 2.5, 0.01);
     }
 
     @Test
