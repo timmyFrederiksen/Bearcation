@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import { useLoadScript, Circle, GoogleMap, Marker } from "@react-google-maps/api";
-import { useNavigate } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import IconButton from '@material-ui/core/IconButton';
 import Multiselect from 'multiselect-react-dropdown';
@@ -23,12 +23,16 @@ function PlaceCard(name, description, distance, navigate) {
     return (
         <div className="location-card">
             <div className="location-card-detail">
-                <h3 className="location-card-detail-data">{name} {distance} mi</h3>
+                <h3 className="location-card-detail-data">{name}</h3>
             </div>
             <div className="location-card-navigate">
                 <IconButton
                     className="location-card-navigate-button"
+<<<<<<< Updated upstream
                     onClick={() => navigate('/location')}
+=======
+                    onClick={e=>{(navigate('/location', {state:{name: name}}))}}
+>>>>>>> Stashed changes
                 >
                     <KeyboardArrowRightIcon fontSize="large" />
                 </IconButton>
@@ -41,6 +45,8 @@ function PlaceCard(name, description, distance, navigate) {
 
 function Explore() {
 
+    const location = useLocation();
+
     const [vacationLocation, setVacationLocation] = useState();
     const [places, setPlaces] = useState([]);
     const [loadAdvancedSearch, setLoadAdvancedSearch] = useState(false);
@@ -52,6 +58,48 @@ function Explore() {
         () => ({ lat: 31.5489, lng: -97.1131 }),
         []
     );
+<<<<<<< Updated upstream
+=======
+
+    const [apiActivities, setApiActivities] = useState();
+    useEffect(async () =>{
+        let response;
+        await axios.get("http://localhost:80/location/activities")
+            .then(res => {
+                console.log(res);
+                response = res.data;
+            })
+        setApiActivities(response);
+    }, []);
+
+    const [locations, setLocations] = useState();
+
+    useEffect(async () =>{
+        let response;
+        let latitude = vacationLocation.lat;
+        let longitude = vacationLocation.lng;
+        let price = 0;
+
+        const recommendDto = {
+            latitude: latitude,
+            longitude: longitude,
+            price: price,
+            activities: ["Biking"]
+        };
+        await axios.post("http://localhost:80/location/search", recommendDto).then(res => {
+            response = res.data;
+        })
+        console.log("r", response);
+
+        // await axios.get("http://localhost:80/location/locations")
+        //     .then(res => {
+        //
+        //         response = res.data;
+        //     })
+        setLocations(response);
+    }, [vacationLocation]);
+
+>>>>>>> Stashed changes
     const navigate = useNavigate();
 
     const onLoad = useCallback((map) => (mapRef.current = map), [])
@@ -80,26 +128,31 @@ function Explore() {
         <div className="explore-page">
             <HeaderBar />
             <div className="explore-body">
-                <h1>Explore Parks</h1>
+                {(location.state.name !== "guest") ?
+                (
+                    <h1>Explore Parks, {location.state.name}!</h1>
+                ) : (
+                    <h1>Explore Parks!</h1>
+                )}
                 <div className="search-form">
                     <div className="search-group form-group">
                         <NewPlaces className="search-text" setVacationLocation={(position) => {
                             setVacationLocation(position);
                             mapRef.current?.panTo(position);
                         }} />
-                        <div className="advanced-search-button-group">
-                            <Button
-                                className="advanced-search-button"
-                                variant="text"
-                                onClick={() => setLoadAdvancedSearch(!loadAdvancedSearch)}
-                            >
-                                Advanced Search
-                            </Button>
-                        </div>
+                        {/*<div className="advanced-search-button-group">*/}
+                        {/*    <Button*/}
+                        {/*        className="advanced-search-button"*/}
+                        {/*        variant="text"*/}
+                        {/*        onClick={() => setLoadAdvancedSearch(!loadAdvancedSearch)}*/}
+                        {/*    >*/}
+                        {/*        Advanced Search*/}
+                        {/*    </Button>*/}
+                        {/*</div>*/}
                     </div>
-                    {loadAdvancedSearch && (
+                    {true && (
                         <div className="advanced-search-group">
-                            <h3>Advanced Criteria</h3>
+                            {/*<h3>Advanced Criteria</h3>*/}
                             <div className="advanced-search-activities-group">
                                 <h4>Activites</h4>
                                 <Multiselect
@@ -158,7 +211,15 @@ function Explore() {
                             {/* {places.map((place) => (
                             <PlaceCard place={place} />
                         ))} */}
+<<<<<<< Updated upstream
                             {PlaceCard(grandCanyon.name, grandCanyon.description, grandCanyon.distance, navigate)}
+=======
+
+                            {locations?.map(((place) => (
+                                PlaceCard(place.name, place.description, "--", navigate))))}
+
+                            {/*{PlaceCard(grandCanyon.name, grandCanyon.description, grandCanyon.distance, navigate)}*/}
+>>>>>>> Stashed changes
                         </div>
                     </div>
                 </div>

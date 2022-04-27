@@ -11,6 +11,18 @@ const AlaskaPark = {
     'rating': 4.8
 }
 
+<<<<<<< Updated upstream
+=======
+    if(response !== ""){
+        navigate('/customer-dashboard', {state:{fName: "Francis"}})
+    }else{
+        alert("Credentials do not match any account.")
+    }
+}
+const handleCancelSubmit = async(e, navigate) => {
+    navigate('/customer-dashboard', {state:{fName: "Francis"}})
+}
+>>>>>>> Stashed changes
 function ReviewPage () {
 
     const [rating, setRating] = useState(0);

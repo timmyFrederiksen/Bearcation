@@ -7,6 +7,11 @@ import { useNavigate, Link } from "react-router-dom";
 
 import '../styles/customerDashboard.css'
 import HeaderBar from "./HeaderBar";
+<<<<<<< Updated upstream
+=======
+import DashboardParkCard from "./DashboardParkCard";
+import axios from "axios";
+>>>>>>> Stashed changes
 
 const Person = {
     firstName: "Francis",
@@ -21,26 +26,28 @@ const parkExampleArray = [
 ]
 const parkExample = { name: "Alaska National Park" }
 
-function DashboardParkCard({ park }, navigate){
-    return(
-        <div className="customer-dashboard-park-card">
-            <h5 className="customer-dashboard-location-text">{park.name}</h5>
-            <div className="customer-dashboard-location-navigate">
-                <IconButton
-                    className="customer-dashboard-location-navigate-button"
-                >
-                    <TravelExploreIcon fontSize="small" />
-                </IconButton>
-            </div>
-        </div>
-    );
-}
 
 function CustomerDashboard() {
 
     const [vacationLocation, setVacationLocation] = useState();
     const navigate = useNavigate();
+<<<<<<< Updated upstream
     
+=======
+    const location = useLocation();
+
+    const [locations, setLocations] = useState();
+    useEffect(async () =>{
+        let response;
+        await axios.get("http://localhost:80/location/search")
+            .then(res => {
+                response = res.data;
+                console.log(response);
+            })
+            setLocations(response);
+    }, []);
+
+>>>>>>> Stashed changes
     return (
         <div className="customer-dashboard-page">
             <HeaderBar />
@@ -49,7 +56,7 @@ function CustomerDashboard() {
                     <h1 className="customer-dashboard-welcome-text">
                         <b>Hello, {Person.firstName}!</b>
                     </h1>
-                    <Link to="/explore">
+                    <Link to="/explore" state={{name: location.state.fName}}>
                         <h2 className="customer-dashboard-explore-text">
                             Explore National Parks and Landmarks!
                         </h2>
@@ -63,6 +70,7 @@ function CustomerDashboard() {
                 <div className="customer-dashboard-parks">
                     <h2>View Recommended Parks:</h2>
                     {
+<<<<<<< Updated upstream
                         parkExampleArray.length > 0 
                         ? (
                             <div className="customer-dashboard-recommended-parks">
@@ -73,6 +81,18 @@ function CustomerDashboard() {
                                 Sorry, we do not have any recommended parks.
                             </div>
                         )
+=======
+                        locations
+                            ? (
+                                <div className="customer-dashboard-recommended-parks">
+                                    {locations.map((park) => <DashboardParkCard park={park}/>)}
+                                </div>
+                            ) : (
+                                <div>
+                                    Sorry, we do not have any recommended parks.
+                                </div>
+                            )
+>>>>>>> Stashed changes
                     }
                 </div>
             </div>

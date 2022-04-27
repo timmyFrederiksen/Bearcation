@@ -26,9 +26,28 @@ const signup = async (emailArg, passwordArg, firstnameArg, lastnameArg) => {
 }
 
 
-const handleSubmit = async (e, navigate, email, password, firstname, lastname) => {
+const handleSubmit = async (e, navigate, email, password, confirmPassword, firstname, lastname) => {
     e.preventDefault();
+<<<<<<< Updated upstream
     
+=======
+
+    if(!(email.match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+    )){
+        alert("Please use a valid email address.");
+        return;
+    }
+    if(password.length < 6){
+        alert("Password must be at least 6 characters long.");
+        return;
+    }
+    if(password !== confirmPassword){
+        alert("Confirm password must match entry for password.");
+        return;
+    }
+
+>>>>>>> Stashed changes
     const response = await signup(email, password, firstname, lastname);
     if(response != ""){
         navigate('/')
@@ -55,7 +74,7 @@ function NewSignUp(){
         <div className="signup-page">
             <div className="signup-body">
                 <h2 className="create-tag">Create your Bearcation Account</h2>
-                <form className = "signup-form" onSubmit={e => handleSubmit(e, navigate, email, password, firstname, lastname)} >
+                <form className = "signup-form" onSubmit={e => handleSubmit(e, navigate, email, password, confirmPassword, firstname, lastname)} >
                     <div className="signup-username-group form-group">
                         <input name = "firstname" className="form-control first-name-text" placeholder="First Name" value={firstname} type="text" onChange={e => setFirstname(e.target.value)} required />
                         <input name = "lastname" className="form-control last-name-text" placeholder="Last Name" value={lastname} type="text" onChange={e => setLastname(e.target.value)} required />
@@ -70,10 +89,9 @@ function NewSignUp(){
                         <input name = "confirm-password" className="form-control" placeholder="Confirm Password" value={confirmPassword} type="password" onChange={e => setConfirmPassword(e.target.value)} required />
                     </div>
                     <div className="signup-role-container">
-                        <FormControl size="small" className="signup-role-form">
+                        <FormControl size="medium" className="signup-role-form">
                             <InputLabel id="demo-simple-select-label">Role</InputLabel>
                             <Select
-                                labelId="demo-simple-select-label"
                                 value={role}
                                 label="Role"
                                 onChange={handleChange}

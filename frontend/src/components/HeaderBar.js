@@ -116,8 +116,9 @@ function HeaderBar() {
             transformOrigin={{ horizontal: 'right', vertical: 'top' }}
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
           >
-            <MenuItem 
-              onClick={() => (navigate('/customer-dashboard'))}
+            <MenuItem
+              onClick={() => navigate('/customer-dashboard', { state:{fName: "Francis"}})
+              }
             >
               <Avatar /> Profile
             </MenuItem>
