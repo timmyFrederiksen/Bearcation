@@ -35,33 +35,34 @@ a:hover {
 .signup-username-group {
     padding-top: 20px;
     padding-bottom: 25px;
+    padding-left: 3%;
+    padding-right: 3%;
 }
 
 .first-name-text{
-    margin-right: 5%;
+    margin-right: 10%;
 }
 .first-name-text, .last-name-text {
-    align-items: left;
     display: inline;
     width: 45%;
 }
 
 .email-group {
     padding-bottom: 25px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 3%;
+    padding-right: 3%;
 }
 
 .password-group {
     padding-bottom: 25px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 3%;
+    padding-right: 3%;
 }
 
 .confirm-password-group {
     padding-bottom: 25px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 3%;
+    padding-right: 3%;
 }
 
 .signup-text {
@@ -77,8 +78,8 @@ a:hover {
 }
 
 .signup-role-container{
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 3%;
+    padding-right: 3%;
     padding-bottom: 5%;
     align-items: flex-start;
     text-align: left;
