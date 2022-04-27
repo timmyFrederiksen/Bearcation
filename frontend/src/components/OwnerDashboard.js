@@ -5,9 +5,10 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from 'react-bootstrap/Button';
 
+
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import { MdAddCircleOutline } from "react-icons/md";
-import { useNavigate, Link } from "react-router-dom";
+import {useNavigate, Link, useLocation} from "react-router-dom";
 
 import '../styles/ownerDashboard.css'
 import HeaderBar from "./HeaderBar";
@@ -48,14 +49,15 @@ function OwnerDashboard() {
 
     const [vacationLocation, setVacationLocation] = useState();
     const navigate = useNavigate();
-    
+    const location = useLocation();
+
     return (
         <div className="owner-dashboard-page">
             <HeaderBar />
             <div className="owner-dashboard-body">
                 <div className="owner-dashboard-details">
                     <h1 className="owner-dashboard-welcome-text">
-                        <b>Hello, {Person.firstName}!</b>
+                        <b>Hello, {location.state.fName}!</b>
                     </h1>
                     <Link to="/">
                         <h2 className="owner-dashboard-settings-text">
@@ -67,6 +69,7 @@ function OwnerDashboard() {
                 <Button 
                     variant="success"
                     className="owner-add-park-button"
+                    onClick={() => navigate('/facility', {})}
                 >
                     <MdAddCircleOutline/>{' '}
                     Add a Park
