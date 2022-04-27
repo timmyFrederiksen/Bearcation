@@ -1,3 +1,4 @@
+
 import React, { useState} from "react";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -18,19 +19,16 @@ const signup = async (emailArg, passwordArg, firstnameArg, lastnameArg) => {
     };
     let response;
     await axios.post("http://localhost:80/account/createAccount", signUpDto)
-     .then(res => {
-         console.log(res);
-         response = res.data;
-    })
+        .then(res => {
+            console.log(res);
+            response = res.data;
+        })
     return response;
 }
 
 
 const handleSubmit = async (e, navigate, email, password, confirmPassword, firstname, lastname) => {
     e.preventDefault();
-<<<<<<< Updated upstream
-    
-=======
 
     if(!(email.match(
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
@@ -47,9 +45,8 @@ const handleSubmit = async (e, navigate, email, password, confirmPassword, first
         return;
     }
 
->>>>>>> Stashed changes
     const response = await signup(email, password, firstname, lastname);
-    if(response != ""){
+    if(response !== ""){
         navigate('/')
     }else{
         alert("Credentials do not match any account.")

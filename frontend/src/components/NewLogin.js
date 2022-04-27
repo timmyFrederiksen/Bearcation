@@ -11,32 +11,24 @@ import axios from 'axios';
 import '../styles/login.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 
-<<<<<<< Updated upstream
- const handleSubmit = async(e, navigate, email, password) => {
-=======
+
 const handleSubmit = async(e, navigate, email, password, role) => {
->>>>>>> Stashed changes
     e.preventDefault();
     const loginDto = {
         email: email,
         password: password
     };
-     let response;
+    let response;
     await axios.post("http://localhost:80/account/login", loginDto)
-     .then(res => {
-         console.log(res);
-         response = res.data;
-     })
+        .then(res => {
+            console.log(res);
+            response = res.data;
+        })
 
-<<<<<<< Updated upstream
-    if(response !== ""){
-        navigate('/home')
-=======
     if(response !== "" && role === "Customer"){
         navigate('/customer-dashboard', { state:{fName: response.firstName}})
     } else if(response !== "" && role === "Owner"){
-        navigate('/owner-dashboard', { state:{fName: response.firstName}})
->>>>>>> Stashed changes
+        navigate('/customer-dashboard', { state:{fName: response.firstName}})
     } else {
         alert("Credentials do not match any account.")
     }
@@ -80,16 +72,10 @@ function NewLogin() {
                                 PaperProps={{
                                     elevation: 0,
                                     sx: {
-<<<<<<< Updated upstream
                                       overflow: 'visible',
                                       filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
                                       mt: 1.5,
-                                      '&.MuiMenuItem-root': {
-                                        display: 'flex'
-                                      },
-                                    },
-                                  }}
-=======
+
                                         '& .MuiButtonBase-root': {
                                             padding: 2,
                                             display: 'block',
@@ -102,7 +88,6 @@ function NewLogin() {
                                         }
                                     }
                                 }}
->>>>>>> Stashed changes
                             >
                                 <MenuItem value="Customer">Customer</MenuItem>
                                 <Divider/>

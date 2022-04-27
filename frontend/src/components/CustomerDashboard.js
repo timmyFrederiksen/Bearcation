@@ -2,16 +2,15 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import IconButton from '@material-ui/core/IconButton';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import { useNavigate, Link } from "react-router-dom";
+import {useLocation} from 'react-router-dom';
 
 import '../styles/customerDashboard.css'
 import HeaderBar from "./HeaderBar";
-<<<<<<< Updated upstream
-=======
+
 import DashboardParkCard from "./DashboardParkCard";
 import axios from "axios";
->>>>>>> Stashed changes
 
 const Person = {
     firstName: "Francis",
@@ -31,9 +30,7 @@ function CustomerDashboard() {
 
     const [vacationLocation, setVacationLocation] = useState();
     const navigate = useNavigate();
-<<<<<<< Updated upstream
-    
-=======
+
     const location = useLocation();
 
     const [locations, setLocations] = useState();
@@ -47,14 +44,14 @@ function CustomerDashboard() {
             setLocations(response);
     }, []);
 
->>>>>>> Stashed changes
+
     return (
         <div className="customer-dashboard-page">
             <HeaderBar />
             <div className="customer-dashboard-body">
                 <div className="customer-dashboard-details">
                     <h1 className="customer-dashboard-welcome-text">
-                        <b>Hello, {Person.firstName}!</b>
+                        <b>Hello, {location.state.fName}!</b>
                     </h1>
                     <Link to="/explore" state={{name: location.state.fName}}>
                         <h2 className="customer-dashboard-explore-text">
@@ -70,7 +67,7 @@ function CustomerDashboard() {
                 <div className="customer-dashboard-parks">
                     <h2>View Recommended Parks:</h2>
                     {
-<<<<<<< Updated upstream
+
                         parkExampleArray.length > 0 
                         ? (
                             <div className="customer-dashboard-recommended-parks">
@@ -81,18 +78,7 @@ function CustomerDashboard() {
                                 Sorry, we do not have any recommended parks.
                             </div>
                         )
-=======
-                        locations
-                            ? (
-                                <div className="customer-dashboard-recommended-parks">
-                                    {locations.map((park) => <DashboardParkCard park={park}/>)}
-                                </div>
-                            ) : (
-                                <div>
-                                    Sorry, we do not have any recommended parks.
-                                </div>
-                            )
->>>>>>> Stashed changes
+
                     }
                 </div>
             </div>

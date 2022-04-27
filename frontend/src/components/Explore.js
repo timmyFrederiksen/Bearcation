@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import { useLoadScript, Circle, GoogleMap, Marker } from "@react-google-maps/api";
 import {useLocation, useNavigate} from "react-router-dom";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
@@ -12,6 +12,8 @@ import HeaderBar from "./HeaderBar";
 import "@reach/combobox/styles.css";
 import '../styles/explore.css'
 import NewPlaces from "./NewPlaces";
+import axios from "axios";
+import {map} from "react-bootstrap/ElementChildren";
 
 const grandCanyon = {
     'name': 'Grand Canyon',
@@ -28,11 +30,7 @@ function PlaceCard(name, description, distance, navigate) {
             <div className="location-card-navigate">
                 <IconButton
                     className="location-card-navigate-button"
-<<<<<<< Updated upstream
-                    onClick={() => navigate('/location')}
-=======
                     onClick={e=>{(navigate('/location', {state:{name: name}}))}}
->>>>>>> Stashed changes
                 >
                     <KeyboardArrowRightIcon fontSize="large" />
                 </IconButton>
@@ -52,16 +50,16 @@ function Explore() {
     const [loadAdvancedSearch, setLoadAdvancedSearch] = useState(false);
     const [activities, setActivities] = useState([]);
     const [price, setPrice] = useState(50);
-
+    console.log(vacationLocation);
     const mapRef = useRef();
     const center = useMemo(
         () => ({ lat: 31.5489, lng: -97.1131 }),
         []
     );
-<<<<<<< Updated upstream
-=======
+
 
     const [apiActivities, setApiActivities] = useState();
+
     useEffect(async () =>{
         let response;
         await axios.get("http://localhost:80/location/activities")
@@ -99,7 +97,6 @@ function Explore() {
         setLocations(response);
     }, [vacationLocation]);
 
->>>>>>> Stashed changes
     const navigate = useNavigate();
 
     const onLoad = useCallback((map) => (mapRef.current = map), [])
@@ -119,9 +116,9 @@ function Explore() {
         setPrice(newPrice);
     }
 
-    const parkActivites = [
-        "Camping", "Hiking"
-    ];
+    // const parkActivites = [
+    //     "Camping", "Hiking"
+    // ];
 
     if (!isLoaded) return <div>Loading...</div>
     return (
@@ -163,7 +160,7 @@ function Explore() {
                                     onSelect={(event) => {
                                         setActivities([...event]);
                                     }}
-                                    options={parkActivites}
+                                    options={apiActivities}
                                 />
                             </div>
                             <div className="explore-price-group">
@@ -211,15 +208,8 @@ function Explore() {
                             {/* {places.map((place) => (
                             <PlaceCard place={place} />
                         ))} */}
-<<<<<<< Updated upstream
-                            {PlaceCard(grandCanyon.name, grandCanyon.description, grandCanyon.distance, navigate)}
-=======
-
                             {locations?.map(((place) => (
                                 PlaceCard(place.name, place.description, "--", navigate))))}
-
-                            {/*{PlaceCard(grandCanyon.name, grandCanyon.description, grandCanyon.distance, navigate)}*/}
->>>>>>> Stashed changes
                         </div>
                     </div>
                 </div>
@@ -229,4 +219,3 @@ function Explore() {
 }
 
 export default Explore;
-
