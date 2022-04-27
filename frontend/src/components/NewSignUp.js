@@ -1,9 +1,9 @@
-
 import React, { useState} from "react";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import Divider from '@mui/material/Divider';
 import { useNavigate, Link } from "react-router-dom"
 
 import axios from 'axios';
@@ -86,7 +86,7 @@ function NewSignUp(){
                         <input name = "confirm-password" className="form-control" placeholder="Confirm Password" value={confirmPassword} type="password" onChange={e => setConfirmPassword(e.target.value)} required />
                     </div>
                     <div className="signup-role-container">
-                        <FormControl size="medium" className="signup-role-form">
+                        <FormControl size="small" className="signup-role-form">
                             <InputLabel id="demo-simple-select-label">Role</InputLabel>
                             <Select
                                 value={role}
@@ -95,6 +95,7 @@ function NewSignUp(){
                                 required
                             >
                                 <MenuItem value="Customer">Customer</MenuItem>
+                                <Divider/>
                                 <MenuItem value="Owner">Owner</MenuItem>
                             </Select>
                         </FormControl>
