@@ -4,13 +4,15 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import Divider from '@mui/material/Divider';
 import { useNavigate, Link } from "react-router-dom"
 
 import axios from 'axios';
 import '../styles/login.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 
-const handleSubmit = async(e, navigate, email, password) => {
+
+const handleSubmit = async(e, navigate, email, password, role) => {
     e.preventDefault();
     const loginDto = {
         email: email,
@@ -23,7 +25,9 @@ const handleSubmit = async(e, navigate, email, password) => {
             response = res.data;
         })
 
-    if(response !== ""){
+    if(response !== "" && role === "Customer"){
+        navigate('/customer-dashboard', { state:{fName: response.firstName}})
+    } else if(response !== "" && role === "Owner"){
         navigate('/customer-dashboard', { state:{fName: response.firstName}})
     } else {
         alert("Credentials do not match any account.")
@@ -49,7 +53,7 @@ function NewLogin() {
         <div className="login-page">
             <div className="login-body">
                 <h2 className="welcome-tag">Welcome to Bearcation</h2>
-                <form className="login-form" onSubmit={e => handleSubmit(e, navigate, username, password)} >
+                <form className="login-form" onSubmit={e => handleSubmit(e, navigate, username, password, role)} >
                     <div className="username-group form-group">
                         <input name = "username" className="form-control" placeholder="Email" value={username} type="text" onChange={e => setUsername(e.target.value)} required />
                     </div>
@@ -68,16 +72,25 @@ function NewLogin() {
                                 PaperProps={{
                                     elevation: 0,
                                     sx: {
-                                        overflow: 'visible',
-                                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                                        mt: 1.5,
-                                        '&.MuiMenuItem-root': {
-                                            display: 'flex'
+                                      overflow: 'visible',
+                                      filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                                      mt: 1.5,
+
+                                        '& .MuiButtonBase-root': {
+                                            padding: 2,
+                                            display: 'block',
+                                            color: 'blue'
                                         },
-                                    },
+                                        '& .MuiMenuItem-root': {
+                                            padding: 2,
+                                            display: 'block',
+                                            color: 'blue'
+                                        }
+                                    }
                                 }}
                             >
                                 <MenuItem value="Customer">Customer</MenuItem>
+                                <Divider/>
                                 <MenuItem value="Owner">Owner</MenuItem>
                             </Select>
                         </FormControl>
@@ -96,7 +109,13 @@ function NewLogin() {
                 </div>
                 <div className="proceedAsGuest">
                     <nav>
-                        <Link className="login-text" to="/search">Proceed as Guest</Link>
+                        <Link
+                            className="login-text"
+                            to="/explore"
+                            state={{name: "guest"}}
+                        >
+                            Proceed as Guest
+                        </Link>
                     </nav>
                 </div>
             </div>

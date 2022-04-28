@@ -24,16 +24,17 @@ const handlePostSubmit = async(e, navigate, rating, review, parkName) => {
     //         console.log(res);
     //         response = res.data;
     //     })
-
     if(response !== ""){
-        navigate('/home')
+        navigate('/customer-dashboard', {state:{fName: "Francis"}})
+
     }else{
         alert("Credentials do not match any account.")
     }
 }
 const handleCancelSubmit = async(e, navigate) => {
-    navigate('/home')
+    navigate('/customer-dashboard', {state:{fName: "Francis"}})
 }
+
 function ReviewPage () {
 
     const [rating, setRating] = useState(0);
