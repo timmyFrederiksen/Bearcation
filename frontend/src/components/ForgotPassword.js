@@ -2,6 +2,7 @@ import React from "react";
 import UserService from "../services/UserService";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import HeaderBar from "./HeaderBar";
 
 class ForgotPassword extends React.Component {
     accounts = [];
@@ -34,10 +35,14 @@ class ForgotPassword extends React.Component {
     }
 
     handleSubmit(event) {
+        event.preventDefault();
         const userDto = {
             password: this.state.password,
             username: this.state.username,
         };
+        alert('Why does this not work?');
+        //this.props.navigation.navigate('/home')
+
 
         axios.get("http://localhost:80/user/users", userDto).then((res) => {
             console.log("Password changed successfully!");
@@ -48,7 +53,7 @@ class ForgotPassword extends React.Component {
             });
             alert("The password for " + this.state.username + " has changed.");
         });
-        event.preventDefault();
+
     }
 
     render() {
@@ -60,7 +65,6 @@ class ForgotPassword extends React.Component {
                         <label>Username:</label>
                         <input
                             name="username"
-                            className="form-control"
                             value={this.state.username}
                             type="text"
                             onChange={this.handleInputChange}
@@ -84,7 +88,7 @@ class ForgotPassword extends React.Component {
                             onChange={this.handleInputChange}
                         />
                     </div>
-                    <input type="button" value="Submit" onChange={this.handleSubmit} />
+                    <input type="button" value="Submit" />
                 </form>
                 <br />
                 <label>{this.state.message}</label>
